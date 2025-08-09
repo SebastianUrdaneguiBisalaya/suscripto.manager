@@ -1,5 +1,6 @@
-import InfiniteScroll from "@/components/infinite-scroll";
 import Link from "next/link";
+import InfiniteScroll from "@/components/infinite-scroll";
+import ScrollFadeText from "@/components/scroll-fade-text";
 
 export default function LandingPage() {
   return (
@@ -24,11 +25,11 @@ export default function LandingPage() {
       </header>
       <main
         id="main-landing-page"
-        className="h-full bg-[url('/grid.svg')] bg-cover bg-center w-full flex flex-col justify-center items-center mask-fade-top-bottom py-8"
+        className="h-full w-full flex flex-col justify-center items-center gap-8 py-8"
       >
         <section
           id="hero-landing-page"
-          className="w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
+          className="mask-fade-top-bottom bg-[url('/grid.svg')] bg-cover bg-center w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
         >
           <h1
             className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl"
@@ -59,6 +60,10 @@ export default function LandingPage() {
             </span>
           </Link>
           <InfiniteScroll />
+        </section>
+        
+        <section>
+          <ScrollFadeText text="Suscripto es una aplicación web que te permite registrar, organizar y recibir recordatorios antes de cada cobro. Conecta con Google Calendar y no vuelvas a pagar por algo que no usas." />
         </section>
       </main>
       <footer
