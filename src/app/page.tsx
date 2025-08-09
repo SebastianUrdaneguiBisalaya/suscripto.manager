@@ -11,7 +11,12 @@ export default function LandingPage() {
           suscripto
         </p>
         <button
-          className="font-geist text-lg cursor-pointer font-normal"
+          className="relative font-geist text-lg font-normal bg-none outline-none border-none cursor-pointer text-white
+            [&::after]:content-[''] 
+            [&::after]:absolute [&::after]:bottom-0 [&::after]:left-0 
+            [&::after]:h-0.5 [&::after]:w-0 [&::after]:bg-white
+            [&::after]:transition-all [&::after]:duration-300 [&::after]:ease-in-out
+            hover:[&::after]:w-full"
         >
           Iniciar sesión
         </button>
@@ -22,7 +27,7 @@ export default function LandingPage() {
       >
         <section
           id="hero-landing-page"
-          className="w-full flex flex-col justify-center items-center gap-8 p-2"
+          className="w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
         >
           <h1
             className="text-5xl font-bold font-sora text-center max-w-2xl"
@@ -35,9 +40,22 @@ export default function LandingPage() {
             Registra, organiza y recibe recordatorios antes de cada cobro. Conecta con Google Calendar y no vuelvas a pagar por algo que no usas.
           </p>
           <button
-            className="font-sora font-semibold text-base text-center w-fit px-4 py-3 cursor-pointer rounded-lg bg-white text-black"
+            className="relative font-sora font-semibold text-base text-center w-fit px-4 py-3 cursor-pointer bg-white text-black shadow-[3px_3px_0px_rgba(255,255,255,0.8)] border border-black
+            overflow-hidden
+            [&::after]:content-['']
+            [&::after]:absolute [&::after]:inset-0
+            [&::after]:bg-blue-600
+            [&::after]:scale-x-0
+            [&::after]:origin-left
+            [&::after]:transition-transform [&::after]:duration-300 [&::after]:ease-in-out
+            hover:[&::after]:scale-x-100 hover:[&::after]:origin-right
+            hover:text-white
+            hover:shadow-[3px_3px_0px_rgba(0,102,255,0.4)]
+            "
           >
-            Empezar gratis
+            <span className="relative z-10">
+              Empezar gratis
+            </span>
           </button>
           <InfiniteScroll />
         </section>
