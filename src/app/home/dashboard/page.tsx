@@ -1,6 +1,7 @@
 import BarChart from "@/components/bar-chart";
 import CardStatistic from "@/components/card-statistic";
-import { dataBarChart } from "@/constants/data";
+import TableSubscription from "@/components/table-subscription";
+import { dataBarChart, dataTableSubscription } from "@/constants/data";
 
 export default function DashboardPage() {
   return (
@@ -26,36 +27,43 @@ export default function DashboardPage() {
         </button>
       </div>
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-4 gap-8 auto-rows-min items-start grid-flow-row-dense">
-        <div className="border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-4 gap-8 auto-rows-min items-start grid-flow-row-dense">
+        <div className="sm:col-span-2 lg:col-span-1 border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Suscripciones"
             subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
             value={12}
           />
         </div>
-        <div className="border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
+        <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Suscripciones"
             subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
             value={12}
           />
         </div>
-        <div className="border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
+        <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Suscripciones"
             subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
             value={12}
           />
         </div>
-        <div className="border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
+        <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Suscripciones"
             subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
             value={12}
           />
         </div>
-        <div className="lg:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+        <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)] overflow-hidden">
+          <TableSubscription
+            title="Mis suscripciones"
+            subtitle="Lista de suscripciones activas. En esta sección puedes desactivar las suscripciones que no necesites."
+            data={dataTableSubscription}
+          />
+        </div>
+        <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
           <BarChart
             title="Evolución de suscripciones"
             subtitle="Suma acumulada de los egresos de tus suscripciones (Últimos 12 meses)"
@@ -63,7 +71,7 @@ export default function DashboardPage() {
             dataKey="month"
           />
         </div>
-        <div className="lg:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+        <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
           <BarChart
             title="Suscripciones por categoría"
             subtitle="Suma acumulada de los egresos de tus suscripciones por categoría (Últimos 12 meses)"

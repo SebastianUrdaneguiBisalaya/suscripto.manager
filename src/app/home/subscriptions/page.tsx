@@ -1,4 +1,6 @@
-export default function NotificationsPage() {
+import Table from "@/components/table";
+
+export default function SubscriptionsPage() {
     return (
         <div
             className="flex flex-col gap-8 w-full h-full"
@@ -6,16 +8,19 @@ export default function NotificationsPage() {
             <div
                 className="flex flex-col gap-4 w-full"
             >
-                <h1 className="font-sora text-2xl font-bold text-left text-white-cream">Notificaciones</h1>
+                <h1 className="font-sora text-2xl font-bold text-left text-white-cream">Suscripciones</h1>
                 <p
                     className="font-geist text-gray-400"
                 >
-                    Visualiza los recordatorios de las suscripciones activas próximas a su fecha de facturación.
+                    Visualiza el historial de pago de las suscripciones a lo largo del tiempo.
                 </p>
             </div>
             <div
                 className="flex flex-col gap-3 w-full"
             >
+                <Table
+                    user_id="1"
+                />
             </div>
         </div>
     )
