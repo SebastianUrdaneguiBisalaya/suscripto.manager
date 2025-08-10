@@ -32,6 +32,15 @@
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 
+@utility mask-fade-to-right {
+  -webkit-mask-image: linear-gradient(to right, black 0%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+  mask-image: linear-gradient(to right, black 0%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
 body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
