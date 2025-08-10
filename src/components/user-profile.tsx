@@ -28,10 +28,10 @@ export default function UserProfile() {
                 <div
                     className="flex flex-col items-start gap-0.5"
                 >
-                    <span className="font-sora font-semibold text-sm">
+                    <span className="font-sora font-semibold text-sm text-white-cream">
                         Sebastian Urdanegui
                     </span>
-                    <span className="font-geist font-normal text-xs">
+                    <span className="font-geist font-normal text-xs text-white-cream">
                         @sebastianurdanegui
                     </span>
                 </div>

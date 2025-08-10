@@ -33,7 +33,7 @@ function FadeWord({ word }: { word: string }) {
     return (
         <motion.span
             ref={ref}
-            className="transition-opacity duration-300 ease-in-out font-sora text-2xl"
+            className="transition-opacity duration-300 ease-in-out font-sora text-2xl text-white-cream"
             animate={{ opacity: inView ? 1 : 0.5 }}
         >
             {word}

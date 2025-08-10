@@ -9,10 +9,10 @@ export default function LandingPage() {
         id="header-landing-page"
         className="flex flex-row justify-between items-center"
       >
-        <p className="font-sora text-lg sm:text-2xl font-semibold">
+        <p className="font-sora text-lg sm:text-2xl font-semibold text-white-cream">
           suscripto
         </p>
-        <Link href="/home"
+        <Link href="/home/dashboard"
           className="relative font-geist text-base sm:text-lg font-normal bg-none outline-none border-none cursor-pointer text-white
             [&::after]:content-[''] 
             [&::after]:absolute [&::after]:bottom-0 [&::after]:left-0 
@@ -32,16 +32,16 @@ export default function LandingPage() {
           className="mask-fade-top-bottom bg-[url('/grid.svg')] bg-cover bg-center w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
         >
           <h1
-            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl"
+            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl text-white-cream"
           >
             Controla tus suscripciones en un solo lugar
           </h1>
           <p
-            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl"
+            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream"
           >
             Registra, organiza y recibe recordatorios antes de cada cobro. Conecta con <span className="font-semibold underline">Google Calendar</span> y no vuelvas a pagar por algo que no usas.
           </p>
-          <Link href="/home"
+          <Link href="/home/dashboard"
             className="relative font-sora font-semibold text-sm sm:text-base text-center w-fit px-4 py-3 cursor-pointer bg-white text-black shadow-[3px_3px_0px_rgba(255,255,255,0.8)] border border-black
             overflow-hidden
             [&::after]:content-['']
