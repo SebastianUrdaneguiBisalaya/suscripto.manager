@@ -49,6 +49,31 @@ const dataBarChart = [
     },
 ];
 
+const dataTableSubscription = [
+    {
+        "id": "1",
+        "company": "Netflix",
+        "amount": 45,
+        "currency": "PEN",
+        "recurrence": "Mensual"
+    },
+    {
+        "id": "2",
+        "company": "Youtube",
+        "amount": 12,
+        "currency": "PEN",
+        "recurrence": "Mensual"
+    },
+    {
+        "id": "3",
+        "company": "Prime Video",
+        "amount": 12,
+        "currency": "PEN",
+        "recurrence": "Mensual"
+    },
+]
+
 export {
     dataBarChart,
+    dataTableSubscription,
 }

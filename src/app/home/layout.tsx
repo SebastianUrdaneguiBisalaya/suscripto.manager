@@ -7,9 +7,12 @@ export default function HomeLayout({ children }: Readonly<{ children: React.Reac
             <header
                 className="flex flex-row justify-between items-start"
             >
-                <p className="font-sora text-lg sm:text-2xl font-semibold text-white-cream">
-                suscripto
-                </p>
+                <Link 
+                    href="/"
+                    className="font-sora text-lg sm:text-2xl font-semibold text-white-cream"
+                >
+                    suscripto
+                </Link>
                 <div className="flex flex-row gap-4">
                     <Link
                         className="

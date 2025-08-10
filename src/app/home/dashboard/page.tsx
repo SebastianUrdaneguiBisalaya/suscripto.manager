@@ -1,6 +1,7 @@
 import BarChart from "@/components/bar-chart";
 import CardStatistic from "@/components/card-statistic";
-import { dataBarChart } from "@/constants/data";
+import TableSubscription from "@/components/table-subscription";
+import { dataBarChart, dataTableSubscription } from "@/constants/data";
 
 export default function DashboardPage() {
   return (
@@ -53,6 +54,13 @@ export default function DashboardPage() {
             title="Suscripciones"
             subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
             value={12}
+          />
+        </div>
+        <div className="lg:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <TableSubscription
+            title="Mis suscripciones"
+            subtitle="Lista de suscripciones activas. En esta sección puedes desactivar las suscripciones que no necesites."
+            data={dataTableSubscription}
           />
         </div>
         <div className="lg:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
