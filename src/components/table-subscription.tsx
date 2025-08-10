@@ -55,85 +55,89 @@ export default function TableSubscription({
             <p className="font-geist text-sm text-gray-300 font-normal text-left w-full">
                 {subtitle}
             </p>
-            <table className="table-auto w-full">
-                <thead>
-                    <tr
-                        key="header"
-                        className="border-b border-gray-500">
-                        {
-                            headers.map((header, index) => {
-                                return (
-                                    <th
-                                        key={index}
-                                        className="text-white-cream text-center font-bold text-sm px-4 py-2 whitespace-nowrap"
-                                    >
-                                        {firstLetterToUpperCase(header)}
-                                    </th>
-                                )
-                            })
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                        {
-                            renderData.map((item) => {
-                                return (
-                                    <tr
-                                        key={item.company}
-                                        className="hover:bg-[rgba(255,255,255,0.05)] cursor-pointer border-b border-gray-600/30"
-                                        onClick={() => handleDeleteSubscription(item.company)}
-                                    >
-                                        <td
-                                            className="px-4 py-2"
+            <div
+                className="w-full overflow-x-auto hide-scrollbar"
+            >
+                <table className="table-auto w-full">
+                    <thead>
+                        <tr
+                            key="header"
+                            className="border-b border-gray-500">
+                            {
+                                headers.map((header, index) => {
+                                    return (
+                                        <th
+                                            key={index}
+                                            className="text-white-cream text-center font-bold text-sm px-4 py-2 whitespace-nowrap"
                                         >
-                                            <div
-                                                className="flex flex-row items-center gap-4 justify-center w-fit"
+                                            {firstLetterToUpperCase(header)}
+                                        </th>
+                                    )
+                                })
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {
+                                renderData.map((item) => {
+                                    return (
+                                        <tr
+                                            key={item.company}
+                                            className="hover:bg-[rgba(255,255,255,0.05)] cursor-pointer border-b border-gray-600/30"
+                                            onClick={() => handleDeleteSubscription(item.company)}
+                                        >
+                                            <td
+                                                className="px-4 py-2"
                                             >
-                                                {item.icon ? (
-                                                    <span
-                                                        className="opacity-50 shrink-0 h-auto w-8 flex items-center justify-center"
-                                                    >
-                                                        {item.icon}
-                                                    </span>
-                                                    ) : (
+                                                <div
+                                                    className="flex flex-row items-center gap-4 justify-center w-fit"
+                                                >
+                                                    {item.icon ? (
                                                         <span
                                                             className="opacity-50 shrink-0 h-auto w-8 flex items-center justify-center"
                                                         >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" color="#ffffff"><path d="M7 15a3 3 0 1 0 0 6a3 3 0 0 0 0-6m10 0a3 3 0 1 0 0 6a3 3 0 0 0 0-6m-3 2h-4m12-4c-2.457-1.227-6.027-2-10-2s-7.543.773-10 2"/><path d="m19 11.5l-1.058-6.788c-.215-1.384-1.719-2.134-2.933-1.463l-.615.34a4.94 4.94 0 0 1-4.788 0l-.615-.34c-1.214-.67-2.718.08-2.933 1.463L5 11.5"/></g></svg>
+                                                            {item.icon}
                                                         </span>
-                                                    )
-                                                }
-                                                <span
-                                                    className="font-geist text-white-cream text-right text-sm whitespace-nowrap"
-                                                >
-                                                    {firstLetterToUpperCase(String(item.company))}
-                                                </span>
-                                            </div>
-                                        </td>
+                                                        ) : (
+                                                            <span
+                                                                className="opacity-50 shrink-0 h-auto w-8 flex items-center justify-center"
+                                                            >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><g fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" color="#ffffff"><path d="M7 15a3 3 0 1 0 0 6a3 3 0 0 0 0-6m10 0a3 3 0 1 0 0 6a3 3 0 0 0 0-6m-3 2h-4m12-4c-2.457-1.227-6.027-2-10-2s-7.543.773-10 2"/><path d="m19 11.5l-1.058-6.788c-.215-1.384-1.719-2.134-2.933-1.463l-.615.34a4.94 4.94 0 0 1-4.788 0l-.615-.34c-1.214-.67-2.718.08-2.933 1.463L5 11.5"/></g></svg>
+                                                            </span>
+                                                        )
+                                                    }
+                                                    <span
+                                                        className="font-geist text-white-cream text-right text-sm whitespace-nowrap"
+                                                    >
+                                                        {firstLetterToUpperCase(String(item.company))}
+                                                    </span>
+                                                </div>
+                                            </td>
 
-                                        <td
-                                            className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
-                                        >
-                                            {firstLetterToUpperCase(String(item.currency))}
-                                        </td>
+                                            <td
+                                                className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
+                                            >
+                                                {firstLetterToUpperCase(String(item.currency))}
+                                            </td>
 
-                                        <td
-                                            className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
-                                        >
-                                            {firstLetterToUpperCase(String(item.amount))}
-                                        </td>
+                                            <td
+                                                className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
+                                            >
+                                                {firstLetterToUpperCase(String(item.amount))}
+                                            </td>
 
-                                        <td
-                                            className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
-                                        >
-                                            {firstLetterToUpperCase(String(item.recurrence))}
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                </tbody>
-            </table>
+                                            <td
+                                                className="font-geist text-white-cream text-center text-sm px-4 py-2 whitespace-nowrap"
+                                            >
+                                                {firstLetterToUpperCase(String(item.recurrence))}
+                                            </td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
