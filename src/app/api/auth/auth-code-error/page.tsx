@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function AuthCodeErrorPage() {
     return (
         <div
@@ -25,6 +27,12 @@ export default function AuthCodeErrorPage() {
                 >
                     Algo salió mal. Por favor, vuelve a intentarlo.
                 </p>
+                <Link
+                    href="/"
+                    className="font-sora text-sm md:text-base font-semibold text-black bg-white-cream shadow-[3px_3px_0px_rgba(255,255,255,0.8)] border border-black w-fit px-4 py-3 cursor-pointer"
+                >
+                    Iniciar sesión
+                </Link>
             </div>
         </div>
     )
