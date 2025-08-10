@@ -1,7 +1,7 @@
 export default function CardStatistic() {
     return (
         <div
-            className=""
+            className="h-36 w-full flex flex-col"
         >
 
         </div>

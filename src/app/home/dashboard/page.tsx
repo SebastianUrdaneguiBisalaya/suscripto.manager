@@ -1,3 +1,7 @@
+import BarChart from "@/components/bar-chart";
+import CardStatistic from "@/components/card-statistic";
+import { dataBarChart } from "@/constants/data";
+
 export default function DashboardPage() {
   return (
     <main
@@ -22,18 +26,31 @@ export default function DashboardPage() {
         </button>
       </div>
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 grid-rows-4 lg:grid-rows-3 gap-8">
-        <div className="border border-gray-500 rounded-xl h-48 shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
-
+      <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 auto-rows-min items-start grid-flow-row-dense">
+        <div className="border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <CardStatistic />
         </div>
-        <div className="border border-gray-700 rounded-xl h-48 shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
-
+        <div className="border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <CardStatistic />
         </div>
-        <div className="lg:col-span-2 border border-gray-700 rounded-xl h-48 shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
-
+        <div className="border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <CardStatistic />
         </div>
-        <div className="lg:col-span-2 border border-gray-700 rounded-xl h-48 shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
-
+        <div className="lg:col-span-3 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <BarChart
+            title="Evolución de suscripciones"
+            subtitle="Suma acumulada de los egresos de tus suscripciones (Últimos 12 meses)"
+            data={dataBarChart}
+            dataKey="month"
+          />
+        </div>
+        <div className="lg:col-span-3 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+          <BarChart
+            title="Suscripciones por categoría"
+            subtitle="Suma acumulada de los egresos de tus suscripciones por categoría (Últimos 12 meses)"
+            data={dataBarChart}
+            dataKey="month"
+          />
         </div>
       </div>
 
