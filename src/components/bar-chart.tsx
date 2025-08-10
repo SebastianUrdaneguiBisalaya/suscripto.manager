@@ -1,6 +1,7 @@
 "use client";
 
 import { Bar, BarChart, CartesianGrid, XAxis, ResponsiveContainer, Tooltip } from "recharts";
+import { formatAmout } from "@/lib/fn";
 
 type BarChartProps = {
 	title: string;
@@ -73,7 +74,7 @@ export default function BarChartComponent({
 									return (
 										<div className="bg-black border border-gray-500 rounded-lg p-3 shadow-lg">
 											<p className="text-gray-300 text-sm mb-2">
-												{`Monto: ${payload[0].payload.value}`}
+												{`Monto: ${formatAmout(payload[0].payload.value)}`}
 											</p>
 											{
 												payload.map((entry, index) => (
