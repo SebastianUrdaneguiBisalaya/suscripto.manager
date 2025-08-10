@@ -12,6 +12,7 @@
     "@midudev/tailwind-animations": "^0.2.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.54.0",
+    "@tanstack/react-table": "^8.21.3",
     "axios": "1.11.0",
     "lucide-react": "0.539.0",
     "motion": "^12.23.12",

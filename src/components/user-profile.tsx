@@ -38,7 +38,7 @@ export default function UserProfile() {
             </button>
             {
                 isOpen && (
-                    <div className="absolute top-16 right-0 z-10 w-fit rounded-tl-lg rounded-bl-lg rounded-br-lg border border-gray-600 p-2">
+                    <div className="absolute bg-black top-16 right-0 z-10 w-fit rounded-tl-lg rounded-bl-lg rounded-br-lg border border-gray-600 p-2">
                         <button
                             className="flex flex-row items-center gap-2 justify-between w-fit cursor-pointer"
                         >
