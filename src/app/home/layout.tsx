@@ -55,6 +55,28 @@ export default function HomeLayout({ children }: Readonly<{ children: React.Reac
                             Tabla
                         </span>
                     </Link>
+                    <Link
+                        className="
+                            relative border border-gray-500 p-3 rounded-lg cursor-pointer flex justify-center items-center gap-2
+                            overflow-hidden
+                            [&::after]:content-['']
+                            [&::after]:absolute [&::after]:inset-0
+                            [&::after]:bg-blue-600
+                            [&::after]:scale-x-0
+                            [&::after]:origin-left
+                            [&::after]:transition-transform [&::after]:duration-300 [&::after]:ease-in-out
+                            hover:[&::after]:scale-x-100 hover:[&::after]:origin-right
+                            hover:shadow-[3px_3px_0px_rgba(0,102,255,0.4)]
+                            "
+                        href="/home/notifications"
+                    >
+                        <span className="relative z-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M11 16H3v3q0 .825.588 1.413T5 21h6zm2 0v5h6q.825 0 1.413-.587T21 19v-3zm-2-2V9H3v5zm2 0h8V9h-8zM3 7h18V5q0-.825-.587-1.412T19 3H5q-.825 0-1.412.588T3 5z"/></svg>
+                        </span>
+                        <span className="relative font-sora text-sm z-10 text-white text-center">
+                            Notificaciones
+                        </span>
+                    </Link>
                 </div>
                 <UserProfile />
             </header>
