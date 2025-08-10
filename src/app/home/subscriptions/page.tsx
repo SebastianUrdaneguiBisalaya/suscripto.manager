@@ -1,3 +1,5 @@
+import Table from "@/components/table";
+
 export default function SubscriptionsPage() {
     return (
         <div
@@ -16,6 +18,9 @@ export default function SubscriptionsPage() {
             <div
                 className="flex flex-col gap-3 w-full"
             >
+                <Table
+                    user_id="1"
+                />
             </div>
         </div>
     )
