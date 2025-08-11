@@ -1,6 +1,7 @@
 import Link from "next/link";
 import InfiniteScroll from "@/components/infinite-scroll";
 import ScrollFadeText from "@/components/scroll-fade-text";
+import BentoGrid from "@/components/bento-grid";
 
 export default function LandingPage() {
   return (
@@ -32,12 +33,12 @@ export default function LandingPage() {
           className="mask-fade-top-bottom bg-[url('/grid.svg')] bg-cover bg-center w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
         >
           <h1
-            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl text-white-cream"
+            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl text-white-cream animate-blurred-fade-in"
           >
             Controla tus suscripciones en un solo lugar
           </h1>
           <p
-            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream"
+            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream animate-blurred-fade-in duration-200"
           >
             Registra, organiza y recibe recordatorios antes de cada cobro. Conecta con <span className="font-semibold underline">Google Calendar</span> y no vuelvas a pagar por algo que no usas.
           </p>
@@ -53,6 +54,7 @@ export default function LandingPage() {
             hover:[&::after]:scale-x-100 hover:[&::after]:origin-right
             hover:text-white
             hover:shadow-[3px_3px_0px_rgba(0,102,255,0.4)]
+            animate-blurred-fade-in duration-400
             "
           >
             <span className="relative z-10">
@@ -61,14 +63,29 @@ export default function LandingPage() {
           </Link>
           <InfiniteScroll />
         </section>
-        
-        <section>
+        <section
+          id="section-features"
+          className="w-full flex flex-col items-center gap-8 px-2 py-6"
+        >
+          <div className="w-full flex flex-col gap-4 items-center max-w-2xl">
+            <span className="font-geist text-gray-300 px-4 py-3 rounded-3xl bg-[rgba(255,255,255,0.05)] border border-gray-500 text-sm">
+              Características
+            </span>
+            <h2 className="font-sora text-lg sm:text-2xl text-white-cream text-center font-semibold">Control y seguimiento de tus suscripciones</h2>
+            <p className="font-geist text-base sm:text-lg text-gray-300 text-center">Registra y organiza tus suscripciones, recibe alertas de cobros y accede a estadísticas claras para gestionar mejor tus gastos.</p>
+          </div>
+          <BentoGrid />
+        </section>
+        <section
+          id="section-about"
+          className="w-full flex flex-col items-center gap-8 px-2 py-6"
+        >
           <ScrollFadeText text="Suscripto es una aplicación web que te permite registrar, organizar y recibir recordatorios antes de cada cobro. Conecta con Google Calendar y no vuelvas a pagar por algo que no usas." />
         </section>
       </main>
       <footer
         id="footer-landing-page"
-        className=""
+        className="h-full w-full flex flex-col justify-center items-center gap-8 py-8"
       >
         <p className="font-sora text-xs text-gray-300 font-normal text-center w-full px-4 py-2">
           Desarrollado con 💙 por <a className="font-semibold underline" href="https://sebastianurdanegui.vercel.app/" target="_blank" rel="noreferrer">Sebastian Marat Urdanegui Bisalaya</a>
