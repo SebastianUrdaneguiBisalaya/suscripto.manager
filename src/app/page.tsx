@@ -33,12 +33,12 @@ export default function LandingPage() {
           className="mask-fade-top-bottom bg-[url('/grid.svg')] bg-cover bg-center w-full flex flex-col justify-center items-center gap-8 px-2 py-6"
         >
           <h1
-            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl text-white-cream"
+            className="text-3xl sm:text-5xl font-bold font-sora text-center max-w-2xl text-white-cream animate-blurred-fade-in"
           >
             Controla tus suscripciones en un solo lugar
           </h1>
           <p
-            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream"
+            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream animate-blurred-fade-in duration-200"
           >
             Registra, organiza y recibe recordatorios antes de cada cobro. Conecta con <span className="font-semibold underline">Google Calendar</span> y no vuelvas a pagar por algo que no usas.
           </p>
@@ -54,6 +54,7 @@ export default function LandingPage() {
             hover:[&::after]:scale-x-100 hover:[&::after]:origin-right
             hover:text-white
             hover:shadow-[3px_3px_0px_rgba(0,102,255,0.4)]
+            animate-blurred-fade-in duration-400
             "
           >
             <span className="relative z-10">
