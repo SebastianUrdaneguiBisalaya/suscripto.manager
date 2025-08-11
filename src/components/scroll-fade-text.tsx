@@ -28,7 +28,7 @@ export default function ScrollFadeText({ text }: Props) {
 
 function FadeWord({ word }: { word: string }) {
     const ref = useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { amount: 0.6, margin: "-50px" });
+    const inView = useInView(ref, { amount: 0.8, margin: "-50px" });
 
     return (
         <motion.span

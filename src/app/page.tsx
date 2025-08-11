@@ -84,7 +84,7 @@ export default function LandingPage() {
       </main>
       <footer
         id="footer-landing-page"
-        className=""
+        className="h-full w-full flex flex-col justify-center items-center gap-8 py-8"
       >
         <p className="font-sora text-xs text-gray-300 font-normal text-center w-full px-4 py-2">
           Desarrollado con 💙 por <a className="font-semibold underline" href="https://sebastianurdanegui.vercel.app/" target="_blank" rel="noreferrer">Sebastian Marat Urdanegui Bisalaya</a>

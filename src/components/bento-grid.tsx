@@ -8,7 +8,7 @@ import {
 
 export default function BentoGrid() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full h-[825px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full h-auto">
             <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-3 items-start justify-start h-[45%] w-full rounded-xl border border-gray-600 p-4">
                     <h3 className="font-sora font-semibold text-white-cream text-lg sm:text-xl">Tracking</h3>
@@ -152,7 +152,7 @@ function StatisticsCard({ data }: StatisticsCardProps) {
             <div className="w-full flex flex-row gap-2 items-end grow">
                 {
                     barPlotStatisticsCard.map((item, index) => (
-                        <div key={index} className="w-8 bg-white-cream opacity-70 rounded-tr-md rounded-tl-md" style={{ height: `${item/18}rem` }} />
+                        <div key={index} className="w-full bg-white-cream opacity-70 rounded-tr-md rounded-tl-md" style={{ height: `${item/18}rem` }} />
                     ))
                 }
             </div>
