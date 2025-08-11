@@ -1,6 +1,7 @@
 import Link from "next/link";
 import InfiniteScroll from "@/components/infinite-scroll";
 import ScrollFadeText from "@/components/scroll-fade-text";
+import BentoGrid from "@/components/bento-grid";
 
 export default function LandingPage() {
   return (
@@ -61,8 +62,23 @@ export default function LandingPage() {
           </Link>
           <InfiniteScroll />
         </section>
-        
-        <section>
+        <section
+          id="section-features"
+          className="w-full flex flex-col items-center gap-8 px-2 py-6"
+        >
+          <div className="w-full flex flex-col gap-4 items-center max-w-2xl">
+            <span className="font-geist text-gray-300 px-4 py-3 rounded-3xl bg-[rgba(255,255,255,0.05)] border border-gray-500 text-sm">
+              Características
+            </span>
+            <h2 className="font-sora text-lg sm:text-2xl text-white-cream text-center font-semibold">Control y seguimiento de tus suscripciones</h2>
+            <p className="font-geist text-base sm:text-lg text-gray-300 text-center">Registra y organiza tus suscripciones, recibe alertas de cobros y accede a estadísticas claras para gestionar mejor tus gastos.</p>
+          </div>
+          <BentoGrid />
+        </section>
+        <section
+          id="section-about"
+          className="w-full flex flex-col items-center gap-8 px-2 py-6"
+        >
           <ScrollFadeText text="Suscripto es una aplicación web que te permite registrar, organizar y recibir recordatorios antes de cada cobro. Conecta con Google Calendar y no vuelvas a pagar por algo que no usas." />
         </section>
       </main>

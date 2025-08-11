@@ -11,7 +11,7 @@ export default function ScrollFadeText({ text }: Props) {
     const words = text.split(" ");
     return (
         <div
-            className="h-fit flex flex-col items-center justify-center px-6"
+            className="h-fit flex flex-col items-center justify-center"
         >
             <div
                 className="max-w-2xl text-center leading-relaxed flex flex-wrap gap-2"
