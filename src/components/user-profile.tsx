@@ -12,7 +12,7 @@ export default function UserProfile() {
 
     return (
         <div
-            className="relative"
+            className="relative hidden lg:flex"
         >
             <button
                 onClick={toggleOpen}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import UserProfile from "@/components/user-profile";
+import Sidebar from "@/components/sidebar";
 
 export default function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
@@ -13,7 +14,7 @@ export default function HomeLayout({ children }: Readonly<{ children: React.Reac
                 >
                     suscripto
                 </Link>
-                <div className="flex flex-row gap-4">
+                <div className="hidden lg:flex flex-row gap-4">
                     <Link
                         className="
                             relative border border-gray-500 p-3 rounded-lg cursor-pointer flex justify-center items-center gap-2
@@ -82,6 +83,7 @@ export default function HomeLayout({ children }: Readonly<{ children: React.Reac
                     </Link>
                 </div>
                 <UserProfile />
+                <Sidebar />
             </header>
             {children}
         </div>

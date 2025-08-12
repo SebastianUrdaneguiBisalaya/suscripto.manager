@@ -1,9 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import BarChart from "@/components/bar-chart";
 import CardStatistic from "@/components/card-statistic";
 import TableSubscription from "@/components/table-subscription";
+import RegisterForm from "@/components/register-form";
 import { dataBarChart, dataTableSubscription } from "@/constants/data";
 
 export default function DashboardPage() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const toggleRegisterForm = () => {
+    setIsOpen((prev) => !prev);
+  }
+
   return (
     <main
       className="flex flex-col gap-8 w-full h-full"
@@ -13,6 +23,7 @@ export default function DashboardPage() {
         <button
           className="flex flex-row items-center gap-2 rounded-lg bg-white shadow-[3px_3px_0px_rgba(255,255,255,0.8)] border border-black w-fit px-4 py-3 cursor-pointer"
           type="button"
+          onClick={toggleRegisterForm}
         >
           <span
             className="flex flex-row items-center justify-center"
@@ -84,7 +95,10 @@ export default function DashboardPage() {
       <div className="w-full">
 
       </div>
-
+      <RegisterForm
+        isOpen={isOpen}
+        toggleRegisterForm={toggleRegisterForm}
+      />
     </main>
   )
 }
