@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Geist } from "next/font/google";
 import "./globals.css";
+import { ReactQueryClientProvider } from "@provider/ReactQueryClientProvider";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -23,12 +24,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${sora.variable} ${geist.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <ReactQueryClientProvider>
+      <html lang="en">
+        <body
+          className={`${sora.variable} ${geist.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
+    </ReactQueryClientProvider>
   );
 }
