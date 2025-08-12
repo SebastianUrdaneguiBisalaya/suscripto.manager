@@ -70,7 +70,7 @@ export default function RegisterForm({
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Recurrencia *"
-                            options={["", "Diaria", "Semanal", "Mensual", "Trimestral", "Bimestral", "Anual"]}
+                            options={["", "Diaria", "Semanal", "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual"]}
                             value={data.recurrence}
                             setValue={(value) => setData((prev) => ({ ...prev, recurrence: value }))}
                         />
