@@ -98,7 +98,7 @@ export default function BarChartComponent({
 							}}
 							cursor={{ fill: "rgba(49, 48, 49, 0.3)" }}
 						/>
-						<Bar dataKey="value" fill="#f8f9f6" opacity={0.9} radius={[4, 4, 0, 0]} />
+						<Bar dataKey="value" fill="#f8f9f6" opacity={0.7} radius={[4, 4, 0, 0]} />
 					</BarChart>
 				</ResponsiveContainer>
 			</div>
