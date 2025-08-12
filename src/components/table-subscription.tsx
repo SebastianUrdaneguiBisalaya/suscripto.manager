@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { firstLetterToUpperCase } from "@/lib/fn";
 import icons from "@/constants/icons";
+import CancelSubscription from "@/components/cancel-subscription";
 
 interface ItemProps {
     id: string;
@@ -17,11 +19,21 @@ interface ItemsProps {
     subtitle: string;
 }
 
+interface CancelSubscriptionProps {
+    subscription_id: string;
+    platform_name: string;
+}
+
 export default function TableSubscription({
     data,
     title,
     subtitle,
 }: ItemsProps) {
+    const [isShownModal, setIsShownModal] = useState<boolean>(false);
+    const [dataToCancel, setDataToCancel] = useState<CancelSubscriptionProps>({
+        subscription_id: "",
+        platform_name: "",
+    });
     const headers = ["Plataforma", "Moneda", "Monto", "Frecuencia"];
     const renderData = data.map((item) => {
         return {
@@ -34,9 +46,17 @@ export default function TableSubscription({
         }
     });
 
+    const toggleOpen = () => {
+        setIsShownModal((prev) => !prev);
+    }
+
     const handleDeleteSubscription = (company: string) => {
         const findSubscriptionId = data.find((item) => item.company === company)?.id;
         console.log(findSubscriptionId);
+        setDataToCancel({
+            subscription_id: findSubscriptionId ?? "",
+            platform_name: company,
+        });
     }
     return (
         <div
@@ -138,6 +158,16 @@ export default function TableSubscription({
                     </tbody>
                 </table>
             </div>
+            {
+                isShownModal && (
+                    <CancelSubscription
+                        subscription_id={dataToCancel.subscription_id}
+                        platform_name={dataToCancel.platform_name}
+                        isShown={isShownModal}
+                        toggle={toggleOpen}
+                    />
+                )
+            }
         </div>
     )
 }

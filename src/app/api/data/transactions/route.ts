@@ -4,9 +4,9 @@ import { createClient } from "@/lib/supabase/server";
 export async function GET({
     params
 }: {
-    params: Promise<{ user_id: string }>;
+    params: Promise<{ user_id: string, limit: number, offset: number }>;
 }) {
-    const { user_id } = await params;
+    const { user_id, limit, offset } = await params;
     if (!user_id) {
         return NextResponse.json({
             error: "Faltan datos obligatorios.",
@@ -16,11 +16,14 @@ export async function GET({
     }
     try {
         const supabase = await createClient();
-        const { data, error } = await supabase.
-        from("subscriptions")
-        .select("platforms(platform_name), currency, amount, recurrence")
-        .eq("user_id", user_id)
-        .eq("is_active", true);
+        const { data, error } = await supabase.rpc(
+            "get_transactions",
+            {
+                p_user_id: user_id,
+                p_limit: limit,
+                p_offset: offset,
+            }
+        );
 
         if (error) {
             return NextResponse.json({
