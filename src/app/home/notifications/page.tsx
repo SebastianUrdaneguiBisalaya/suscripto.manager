@@ -1,3 +1,5 @@
+"use client";
+
 import { useNotifications } from "@/apis/hooks";
 import CardNotification from "@/components/card-notification";
 import { useUserStore } from "@/store/useUserStore";

@@ -19,7 +19,7 @@ type ResponseStatistics = APIResponse<{
     total_usd: number;
     accounts: number;
     platforms: number;
-}>;
+}[]>;
 
 type RequestSubscriptions = APIRequest<{
     user_id: string;
@@ -27,7 +27,9 @@ type RequestSubscriptions = APIRequest<{
 
 type ResponseSubscriptions = APIResponse<{
     id: string;
-    platform_name: string;
+    platforms: {
+        platform_name: string;
+    };
     currency: string;
     amount: number;
     recurrence: string;
