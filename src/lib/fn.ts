@@ -8,7 +8,13 @@ const formatAmout = (value: number) => {
     return Number(value).toFixed(2);
 };
 
+const cutFullName = (fullName: string) => {
+    const name = fullName.split(" ").slice(0, 2).join(" ");
+    return name;
+};
+
 export {
     firstLetterToUpperCase,
     formatAmout,
+    cutFullName
 }

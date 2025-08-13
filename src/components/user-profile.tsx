@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/useUserStore";
 import { SignOut } from "@/app/api/auth/actions";
 import { createClient } from "@/lib/supabase/client";
+import { cutFullName } from "@/lib/fn";
 
 export default function UserProfile() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,7 +60,7 @@ export default function UserProfile() {
                     className="flex flex-col items-start gap-0.5"
                 >
                     <span className="font-sora font-semibold text-sm text-white-cream">
-                        {user?.user_name}
+                        {cutFullName(user?.user_name ?? "")}
                     </span>
                     <span className="font-geist font-normal text-xs text-white-cream">
                         {user?.user_email}
