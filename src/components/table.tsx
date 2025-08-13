@@ -20,7 +20,7 @@ interface Item {
     recurrence: string;
     amount: number;
     currency: string;
-    card_type?: string;
+    payment_method?: string;
     card_number?: string;
 }
 
@@ -84,7 +84,7 @@ const columns = [
         header: "Fecha del próximo pago",
         cell: (info) => info.getValue(),
     }),
-    columnHelper.accessor("card_type", {
+    columnHelper.accessor("payment_method", {
         header: "Tarjeta",
         cell: (info) => info.getValue() ?? "",
     }),
