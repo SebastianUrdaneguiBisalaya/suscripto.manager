@@ -1,10 +1,11 @@
 interface CardNotificationProps {
-    title: string;
-    date: string;
-    description: string;
+    platform_name: string;
+    amount: number;
+    currency: string;
+    next_date: string;
 }
 
-export default function CardNotification({ title, date, description }: CardNotificationProps) {
+export default function CardNotification({ platform_name, amount, currency, next_date }: CardNotificationProps) {
     return (
         <div
             className="border-t border-b border-gray-600 p-3 flex flex-row items-center gap-6 hover:bg-[rgba(255,255,255,0.03)] rounded-lg"
@@ -18,10 +19,10 @@ export default function CardNotification({ title, date, description }: CardNotif
                 <p
                     className="font-geist font-bold text-base text-white-cream"
                 >
-                    {title}
+                    {platform_name}
                 </p>
                 <span className="font-geist text-sm text-gray-400">
-                    {description}
+                    {currency} - {amount}
                 </span>
             </div>
             <div className="flex flex-row items-center gap-2">
@@ -29,7 +30,7 @@ export default function CardNotification({ title, date, description }: CardNotif
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16"><path fill="#ffffff" d="M14.5 16h-13C.67 16 0 15.33 0 14.5v-12C0 1.67.67 1 1.5 1h13c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5M1.5 2c-.28 0-.5.22-.5.5v12c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-12c0-.28-.22-.5-.5-.5z"/><path fill="#ffffff" d="M4.5 4c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v3c0 .28-.22.5-.5.5m7 0c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v3c0 .28-.22.5-.5.5m4 2H.5C.22 6 0 5.78 0 5.5S.22 5 .5 5h15c.28 0 .5.22.5.5s-.22.5-.5.5"/></svg>
                 </span>
                 <span className="font-geist text-white-cream text-sm">
-                    {date}
+                    {next_date}
                 </span>
             </div>
             <div className="flex justify-center items-center">

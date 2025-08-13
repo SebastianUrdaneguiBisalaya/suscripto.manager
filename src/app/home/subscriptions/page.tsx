@@ -1,6 +1,8 @@
 import Table from "@/components/table";
+import { useUserStore } from "@/store/useUserStore";
 
 export default function SubscriptionsPage() {
+    const { user } = useUserStore();
     return (
         <div
             className="flex flex-col gap-8 w-full h-full"
@@ -19,7 +21,7 @@ export default function SubscriptionsPage() {
                 className="flex flex-col gap-3 w-full"
             >
                 <Table
-                    user_id="1"
+                    user_id={user?.user_id ?? ""}
                 />
             </div>
         </div>

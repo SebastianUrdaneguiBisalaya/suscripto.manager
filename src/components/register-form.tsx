@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Input from "@/components/input";
 import Select from "@/components/select";
+import { useUserStore } from "@/store/useUserStore";
+import { useRegisterForm } from "@/apis/hooks";
 
 interface RegisterFormProps {
     isOpen: boolean;
@@ -15,23 +17,45 @@ interface DataProps {
     currency: string;
     amount: number;
     date_start: string;
-    payment_method?: string;
-    card_number?: string;
+    payment_method: string | null;
+    card_number: string | null;
 }
 
 export default function RegisterForm({
     isOpen,
     toggleRegisterForm,
 }: RegisterFormProps) {
+    const { user } = useUserStore();
+    const { mutateAsync: registerForm } = useRegisterForm();
+
     const [data, setData] = useState<DataProps>({
         company: "",
         recurrence: "",
         currency: "",
         amount: 0,
         date_start: "",
-        payment_method: "",
-        card_number: "",
+        payment_method: null,
+        card_number: null,
     });
+
+    const handleRegisterForm = async () => {
+        try {
+            await registerForm({
+                user_id: user?.user_id ?? "",
+                company_id: data.company,
+                recurrence: data.recurrence,
+                amount: data.amount,
+                currency: data.currency,
+                date_start: data.date_start,
+                payment_method_id: data.payment_method,
+                card_number: data.card_number,
+            });
+            toggleRegisterForm();
+        } catch (error: unknown) {
+            console.error(`Ocurrió un error al registrar la suscripción: ${error}`);
+        }
+    }
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflowY = "hidden";
@@ -117,6 +141,8 @@ export default function RegisterForm({
                     </div>
                     <button
                         className="bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg"
+                        onClick={handleRegisterForm}
+                        type="button"
                     >
                         Guardar suscripción
                     </button>

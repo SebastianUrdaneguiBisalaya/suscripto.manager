@@ -18,7 +18,7 @@ export async function GET({
         const supabase = await createClient();
         const { data, error } = await supabase.
         from("subscriptions")
-        .select("platforms(platform_name), currency, amount, recurrence")
+        .select("id, platforms(platform_name), currency, amount, recurrence")
         .eq("user_id", user_id)
         .eq("is_active", true);
 

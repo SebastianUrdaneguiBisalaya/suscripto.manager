@@ -7,7 +7,7 @@ import CancelSubscription from "@/components/cancel-subscription";
 
 interface ItemProps {
     id: string;
-    company: string;
+    platform_name: string;
     amount: number;
     currency: string;
     recurrence: string;
@@ -38,8 +38,8 @@ export default function TableSubscription({
     const renderData = data.map((item) => {
         return {
             id: item.id,
-            icon: icons.find((icon) => icon.name === item.company)?.icon,
-            company: item.company,
+            icon: icons.find((icon) => icon.name === item.platform_name)?.icon,
+            company: item.platform_name,
             currency: item.currency,
             amount: item.amount,
             recurrence: item.recurrence,
@@ -51,7 +51,7 @@ export default function TableSubscription({
     }
 
     const handleDeleteSubscription = (company: string) => {
-        const findSubscriptionId = data.find((item) => item.company === company)?.id;
+        const findSubscriptionId = data.find((item) => item.platform_name === company)?.id;
         console.log(findSubscriptionId);
         setDataToCancel({
             subscription_id: findSubscriptionId ?? "",
