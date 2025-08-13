@@ -25,7 +25,8 @@
       "@/lib/*": ["./src/lib/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/config/*": ["./src/config/*"],
-      "@provider/*": ["./src/provider/*"]
+      "@provider/*": ["./src/provider/*"],
+      "@/apis/*": ["./src/apis/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
