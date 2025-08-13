@@ -22,12 +22,12 @@ export default function CardStatistic({
                 className="flex flex-col items-center gap-1"
             >
                 <span
-                    className="text-white-cream font-geist font-medium text-sm text-center"
+                    className="text-white-cream font-geist font-medium text-base text-center"
                 >
                     {title}
                 </span>
                 <span
-                    className="text-gray-400 font-geist font-normal text-xs text-center"
+                    className="text-gray-400 font-geist font-normal text-sm text-center"
                 >
                     {subtitle}
                 </span>

@@ -1,3 +1,5 @@
+"use client";
+
 import Table from "@/components/table";
 import { useUserStore } from "@/store/useUserStore";
 

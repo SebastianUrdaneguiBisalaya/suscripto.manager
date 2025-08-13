@@ -14,10 +14,12 @@ interface DataProps {
     total_usd: number;
     accounts: number;
     platforms: number;
-  } | null,
+  }[] | null,
   tableSubscription: {
     id: string;
-    platform_name: string;
+    platforms: {
+      platform_name: string;
+    };
     amount: number;
     currency: string;
     recurrence: string;
@@ -73,30 +75,30 @@ export default function DashboardPage() {
       <div className="w-full grid grid-cols-1 sm:grid-cols-4 gap-8 auto-rows-min items-start grid-flow-row-dense">
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
-            value={data.statistics?.total_pen ?? 0}
+            title="Gasto total - PEN"
+            subtitle="Suma acumulada (en soles)"
+            value={data.statistics?.[0]?.total_pen ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
-            value={data.statistics?.total_usd ?? 0}
+            title="Gasto total - USD"
+            subtitle="Suma acumulada (en dólares)"
+            value={data.statistics?.[0]?.total_usd ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
-            value={data.statistics?.platforms ?? 0}
+            title="Plataformas activas"
+            subtitle="Cantidad total"
+            value={data.statistics?.[0]?.platforms ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
-            value={data.statistics?.accounts ?? 0}
+            title="Cuentas activas"
+            subtitle="Cantidad total"
+            value={data.statistics?.[0]?.accounts ?? 0}
           />
         </div>
         <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)] overflow-hidden">
@@ -108,8 +110,8 @@ export default function DashboardPage() {
         </div>
         <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
           <BarChart
-            title="Evolución de suscripciones"
-            subtitle="Suma acumulada de los egresos de tus suscripciones (Últimos 12 meses)"
+            title="Evolución de suscripciones - PEN"
+            subtitle="Suma acumulada de los egresos de tus suscripciones en soles (Últimos 12 meses)"
             data={data.barChart ?? []}
             dataKey="month"
             currency="PEN"
@@ -117,8 +119,8 @@ export default function DashboardPage() {
         </div>
         <div className="sm:col-span-4 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
           <BarChart
-            title="Suscripciones por categoría"
-            subtitle="Suma acumulada de los egresos de tus suscripciones por categoría (Últimos 12 meses)"
+            title="Evolución de suscripciones - USD"
+            subtitle="Suma acumulada de los egresos de tus suscripciones en dólares (Últimos 12 meses)"
             data={data.barChart ?? []}
             dataKey="month"
             currency="USD"

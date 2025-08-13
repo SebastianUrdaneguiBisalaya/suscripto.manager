@@ -1,18 +1,35 @@
-interface SelectProps {
-    label: string;
-    options: string[];
-    value: string;
-    setValue: (value: string) => void;
+interface DataProps {
+    company: string;
+    recurrence: string;
+    currency: string;
+    amount: string;
+    date_start: string;
+    payment_method: string | null;
+    card_number: string | null;
 }
 
-export default function Input({
+interface SelectProps {
+    label: string;
+    options: Record<string, string>[];
+    field: keyof DataProps;
+    value: string;
+    setValue: React.Dispatch<React.SetStateAction<DataProps>>;
+}
+
+export default function Select({
     label,
     options,
+    field,
     value,
     setValue,
 }: SelectProps) {
     const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setValue(event.target.value);
+        const selectedValue = event.target.value;
+        const selectedOption = options.find((option) => Object.values(option)[0] === selectedValue);
+        if (selectedOption) {
+            const key = Object.values(selectedOption)[0];
+            setValue((prev) => ({ ...prev, [field]: key }));
+        }
     };
     return (
         <div className="w-full flex flex-col gap-2">
@@ -24,14 +41,18 @@ export default function Input({
                 value={value}
             >
                 {
-                    options.map((option, index) => (
-                        <option
-                            key={index}
-                            value={option}
-                        >
-                            {option}
-                        </option>
-                    ))
+                    options.map((option) => {
+                        const key = Object.values(option)[0];
+                        const optionValue = Object.values(option)[1];
+                        return (
+                            <option
+                                key={key}
+                                value={key}
+                            >
+                                {optionValue}
+                            </option>
+                        )
+                    })
                 }
             </select>
         </div>

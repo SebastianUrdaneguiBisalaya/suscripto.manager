@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Input from "@/components/input";
 import Select from "@/components/select";
 import { useUserStore } from "@/store/useUserStore";
-import { useRegisterForm } from "@/apis/hooks";
+import { useRegisterForm, useGetPlatforms, useGetPaymentMethods } from "@/apis/hooks";
+import { dataRecurrences, dataCurrencies } from "@/constants/data";
 
 interface RegisterFormProps {
     isOpen: boolean;
@@ -15,7 +16,7 @@ interface DataProps {
     company: string;
     recurrence: string;
     currency: string;
-    amount: number;
+    amount: string;
     date_start: string;
     payment_method: string | null;
     card_number: string | null;
@@ -26,15 +27,17 @@ export default function RegisterForm({
     toggleRegisterForm,
 }: RegisterFormProps) {
     const { user } = useUserStore();
-    const { mutateAsync: registerForm } = useRegisterForm();
+    const { data: platforms, isPending: isLoadingPlatforms } = useGetPlatforms();
+    const { data: payment_methods, isPending: isLoadingPaymentMethods } = useGetPaymentMethods();
+    const { mutateAsync: registerForm, isPending: isLoadingRegisterForm } = useRegisterForm();
 
     const [data, setData] = useState<DataProps>({
-        company: "",
-        recurrence: "",
-        currency: "",
-        amount: 0,
+        company: platforms?.[0]?.platform_name ?? "",
+        recurrence: dataRecurrences[0].value,
+        currency: dataCurrencies[0].value,
+        amount: "",
         date_start: "",
-        payment_method: null,
+        payment_method: payment_methods?.[0]?.payment_method_name ?? "",
         card_number: null,
     });
 
@@ -44,7 +47,7 @@ export default function RegisterForm({
                 user_id: user?.user_id ?? "",
                 company_id: data.company,
                 recurrence: data.recurrence,
-                amount: data.amount,
+                amount: Number(data.amount),
                 currency: data.currency,
                 date_start: data.date_start,
                 payment_method_id: data.payment_method,
@@ -84,25 +87,27 @@ export default function RegisterForm({
                     </button>
                 </div>
                 <div className="flex flex-col gap-4 pt-4">
-                    <Input
+                    <Select
                         label="Nombre de la plataforma *"
-                        placeholder="Netflix, Spotify, Youtube..."
-                        type="text"
+                        options={platforms ?? []}
+                        field="company"
                         value={data.company}
-                        setValue={(value) => setData((prev) => ({ ...prev, company: value }))}
+                        setValue={setData}
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Recurrencia *"
-                            options={["", "Diaria", "Semanal", "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual"]}
+                            options={dataRecurrences}
+                            field="recurrence"
                             value={data.recurrence}
-                            setValue={(value) => setData((prev) => ({ ...prev, recurrence: value }))}
+                            setValue={setData}
                         />
                         <Select
                             label="Moneda *"
-                            options={["", "PEN", "USD"]}
+                            options={dataCurrencies}
+                            field="currency"
                             value={data.currency}
-                            setValue={(value) => setData((prev) => ({ ...prev, currency: value }))}
+                            setValue={setData}
                         />
                     </div>
                     <Input
@@ -110,7 +115,7 @@ export default function RegisterForm({
                         placeholder="0"
                         type="number"
                         value={data.amount}
-                        setValue={(value) => setData((prev) => ({ ...prev, amount: Number(value) }))}
+                        setValue={(value) => setData((prev) => ({ ...prev, amount: value }))}
                     />
                     <Input
                         label="Fecha inicio *"
@@ -127,9 +132,10 @@ export default function RegisterForm({
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Método de pago"
-                            options={["", "Visa", "MasterCard", "PayPal", "Otros"]}
+                            options={payment_methods ?? []}
+                            field="payment_method"
                             value={data.payment_method ?? ""}
-                            setValue={(value) => setData((prev) => ({ ...prev, payment_method: value }))}
+                            setValue={setData}
                         />
                         <Input
                             label="Últimos 3 dígitos"
@@ -139,13 +145,18 @@ export default function RegisterForm({
                             setValue={(value) => setData((prev) => ({ ...prev, card_number: value }))}
                         />
                     </div>
-                    <button
-                        className="bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg"
-                        onClick={handleRegisterForm}
-                        type="button"
-                    >
-                        Guardar suscripción
-                    </button>
+                    {
+                        !isLoadingPaymentMethods && !isLoadingPlatforms && (
+                            <button
+                                className={`bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg ${isLoadingRegisterForm ? "opacity-50 cursor-not-allowed" : ""}`}
+                                onClick={handleRegisterForm}
+                                disabled={isLoadingRegisterForm}
+                                type="button"
+                            >
+                                {isLoadingRegisterForm ? "Guardando..." : "Guardar suscripción"}
+                            </button>
+                        ) 
+                    }
                 </div>
             </div>
         </div>

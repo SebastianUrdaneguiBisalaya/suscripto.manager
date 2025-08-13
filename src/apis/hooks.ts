@@ -6,6 +6,8 @@ import {
     getNotifications,
     postRegisterForm,
     postCancelSubscription,
+    getPlatforms,
+    getPaymentMethods,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
 
@@ -103,17 +105,17 @@ export const useRegisterForm = () => {
                 },
             });
         },
-        onSuccess: (_data, variables) => {
-            queryClient.invalidateQueries({
-                queryKey: ["statistics", variables.user_id],
-            });
-            queryClient.invalidateQueries({
-                queryKey: ["subscriptions", variables.user_id],
-            });
-            queryClient.invalidateQueries({
-                queryKey: ["total-by-month", variables.user_id],
-            });
-        },
+        // onSuccess: (_data, variables) => {
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["statistics", variables.user_id],
+        //     });
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["subscriptions", variables.user_id],
+        //     });
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["total-by-month", variables.user_id],
+        //     });
+        // },
         onError: (error: AxiosError) => {
             console.error(error);
         },
@@ -150,3 +152,30 @@ export const useCancelSubscription = () => {
         },
     });
 }
+
+export const useGetPlatforms = () => {
+    return useQuery({
+        queryKey: ["platforms"],
+        queryFn: async () => {
+            const response = await getPlatforms();
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: true,
+        staleTime: 60 * 60 * 1000,
+    });
+}
+
+export const useGetPaymentMethods = () => {
+    return useQuery({
+        queryKey: ["payment-methods"],
+        queryFn: async () => {
+            const response = await getPaymentMethods();
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: true,
+        staleTime: 60 * 60 * 1000,
+    });
+}
+

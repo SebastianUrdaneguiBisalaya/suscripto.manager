@@ -19,7 +19,7 @@ type ResponseStatistics = APIResponse<{
     total_usd: number;
     accounts: number;
     platforms: number;
-}>;
+}[]>;
 
 type RequestSubscriptions = APIRequest<{
     user_id: string;
@@ -27,7 +27,9 @@ type RequestSubscriptions = APIRequest<{
 
 type ResponseSubscriptions = APIResponse<{
     id: string;
-    platform_name: string;
+    platforms: {
+        platform_name: string;
+    };
     currency: string;
     amount: number;
     recurrence: string;
@@ -69,42 +71,62 @@ type RequestCancelSubscription = APIRequest<{
     subscription_id: string;
 }>;
 
+type ResponsePlatforms = APIResponse<{
+    platform_id: string;
+    platform_name: string;
+}[]>;
+
+type ResposePaymentMethods = APIResponse<{
+    payment_method_id: string;
+    payment_method_name: string;
+}[]>;
+
 export const getStatistics = async ({
     data,
 }: RequestStatistics): Promise<ResponseStatistics> => {
-    const response = await requester.get<ResponseStatistics>(`/api/data/statistics/${data.user_id}`);
+    const response = await requester.get<ResponseStatistics>(`/statistics/${data.user_id}`);
     return response.data;
 }
 
 export const getSubscriptions = async ({
     data,
 }: RequestSubscriptions): Promise<ResponseSubscriptions> => {
-    const response = await requester.get<ResponseSubscriptions>(`/api/data/subscriptions/${data.user_id}`);
+    const response = await requester.get<ResponseSubscriptions>(`/subscriptions/${data.user_id}`);
     return response.data;
 }
 
 export const getTotalByMonth = async ({
     data,
 }: RequestTotalByMonth): Promise<ResponseTotalByMonth> => {
-    const response = await requester.get<ResponseTotalByMonth>(`/api/data/total-by-month/${data.user_id}`);
+    const response = await requester.get<ResponseTotalByMonth>(`/total-by-month/${data.user_id}`);
     return response.data;
 }
 
 export const getNotifications = async ({
     data,
 }: RequestNotifications): Promise<ResponseNotifications> => {
-    const response = await requester.get<ResponseNotifications>(`/api/data/notifications/${data.user_id}`);
+    const response = await requester.get<ResponseNotifications>(`/notifications/${data.user_id}`);
     return response.data;
 }
 
 export const postRegisterForm = async ({
     data,
 }: RequestCreateSubscription): Promise<void> => {
-    await requester.post<void>(`/api/data/register`, data);
+    await requester.post<void>(`/register`, data);
 }
 
 export const postCancelSubscription = async ({
     data,
 }: RequestCancelSubscription): Promise<void> => {
-    await requester.post<void>(`/api/data/cancel`, data);
+    await requester.post<void>(`/cancel`, data);
+}
+
+export const getPlatforms = async (): Promise<ResponsePlatforms> => {
+    const response = await requester.get<ResponsePlatforms>(`/platforms`);
+    return response.data;
+}
+
+export const getPaymentMethods = async (): Promise<ResposePaymentMethods> => {
+    const response = await requester.get<ResposePaymentMethods>(`/payment_methods`);
+    return response.data;
 }

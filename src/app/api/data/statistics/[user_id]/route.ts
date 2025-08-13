@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-export async function GET({
+export async function GET(request: Request, {
     params
 }: {
     params: Promise<{ user_id: string }>;
@@ -16,12 +16,10 @@ export async function GET({
     }
     try {
         const supabase = await createClient();
-        const { data, error } = await supabase.
-        from("subscriptions")
-        .select("id, platforms(platform_name), currency, amount, recurrence")
-        .eq("user_id", user_id)
-        .eq("is_active", true);
-
+        const { data, error } = await supabase.rpc(
+            "get_statistics",
+            { p_user_id: user_id }
+        );
         if (error) {
             return NextResponse.json({
                 error: (error as Error).message,

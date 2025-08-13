@@ -1,6 +1,7 @@
 "use client";
 
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
+import { SignInWithGoogle } from "../api/auth/actions";
 
 export default function LoginPage() {
     return (
@@ -45,6 +46,7 @@ export default function LoginPage() {
                     hover:shadow-[3px_3px_0px_rgba(0,102,255,0.4)]
                     "
                     type="button"
+                    onClick={SignInWithGoogle}
                 >
                     <span
                         className="z-10 relative w-fit h-fit flex justify-center items-center"

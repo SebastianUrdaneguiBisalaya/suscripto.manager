@@ -133,10 +133,54 @@ const dataSimulationCard = [
     },
 ];
 
+const dataCurrencies = [
+    {
+        "id": "PEN",
+        "value": "PEN",
+    },
+    {
+        "id": "USD",
+        "value": "USD",
+    }
+];
+
+const dataRecurrences = [
+    {
+        "id": "Diaria",
+        "value": "Diaria",
+    },
+    {
+        "id": "Semanal",
+        "value": "Semanal",
+    },
+    {
+        "id": "Mensual",
+        "value": "Mensual",
+    },
+    {
+        "id": "Bimestral",
+        "value": "Bimestral",
+    },
+    {
+        "id": "Trimestral",
+        "value": "Trimestral",
+    },
+    {
+        "id": "Semestral",
+        "value": "Semestral",
+    },
+    {
+        "id": "Anual",
+        "value": "Anual",
+    }
+];
+
 export {
     dataTrackingCard,
     dataNotificationsCard,
     dataStatisticsCard,
     barPlotStatisticsCard,
     dataSimulationCard,
+    dataCurrencies,
+    dataRecurrences,
 }
