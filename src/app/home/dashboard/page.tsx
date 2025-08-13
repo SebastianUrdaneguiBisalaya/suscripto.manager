@@ -73,29 +73,29 @@ export default function DashboardPage() {
       <div className="w-full grid grid-cols-1 sm:grid-cols-4 gap-8 auto-rows-min items-start grid-flow-row-dense">
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
+            title="Gasto total - PEN"
+            subtitle="Suma acumulada (en soles)"
             value={data.statistics?.total_pen ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
+            title="Gasto total - USD"
+            subtitle="Suma acumulada (en dólares)"
             value={data.statistics?.total_usd ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
+            title="Plataformas activas"
+            subtitle="Cantidad total"
             value={data.statistics?.platforms ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
-            title="Suscripciones"
-            subtitle="Suma acumulada de tus suscripciones (Últimos 12 meses)"
+            title="Cuentas activas"
+            subtitle="Cantidad total"
             value={data.statistics?.accounts ?? 0}
           />
         </div>
