@@ -1,8 +1,10 @@
 import Link from "next/link";
 import UserProfile from "@/components/user-profile";
 import Sidebar from "@/components/sidebar";
+import { protectedPage } from "@/lib/protected";
 
-export default function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+    await protectedPage();
     return (
         <div className="max-w-6xl w-full h-full flex flex-col gap-8 justify-start p-8">
             <header
