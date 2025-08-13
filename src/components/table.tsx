@@ -14,7 +14,7 @@ import icons from "@/constants/icons";
 interface Item {
     id: string;
     company: string;
-    current_date: string;
+    transaction_date: string;
     start_date: string;
     next_date: string;
     recurrence: string;
@@ -27,8 +27,8 @@ interface Item {
 const columnHelper = createColumnHelper<Item>();
 
 const columns = [
-    columnHelper.accessor("current_date", {
-        header: "Fecha actual",
+    columnHelper.accessor("transaction_date", {
+        header: "Fecha",
         cell: (info) => info.getValue(),
     }),
     columnHelper.accessor("company", {
@@ -174,62 +174,64 @@ export default function Table({
 
     return (
         <div
-            className="flex flex-col p-4 w-full overflow-x-auto hide-scrollbar"
+            className="flex flex-col p-4 gap-4 w-full"
         >
-            <table
-                className="min-w-full table-auto"
-            >
-                <thead>
-                    {
-                        table.getHeaderGroups().map(headerGroup => (
-                            <tr
-                                key={headerGroup.id}
-                                className="border-t border-b border-gray-500"
-                            >
-                                {
-                                    headerGroup.headers.map(header => (
-                                        <th
-                                            key={header.id}
-                                            className="text-white-cream font-bold font-geist text-sm px-4 py-2 whitespace-nowrap"
-                                        >
-                                            {flexRender(header.column.columnDef.header, header.getContext())}
-                                        </th>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </thead>
-                <tbody>
-                    {
-                        table.getRowModel().rows.map(row => (
-                            <tr
-                                key={row.id}
-                                className="transition hover:bg-[rgba(255,255,255,0.05)] border-b border-gray-600/30"
-                            >
-                                {
-                                    row.getVisibleCells().map(cell => (
-                                        <td
-                                            key={cell.id}
-                                            className="text-white-cream text-center font-geist px-4 py-2 font-normal text-base whitespace-nowrap"
-                                        >
-                                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                        </td>
-                                    ))
-                                }
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div className="flex flex-col w-full overflow-x-auto hide-scrollbar">
+                <table
+                    className="min-w-full table-auto"
+                >
+                    <thead>
+                        {
+                            table.getHeaderGroups().map(headerGroup => (
+                                <tr
+                                    key={headerGroup.id}
+                                    className="border-t border-b border-gray-500"
+                                >
+                                    {
+                                        headerGroup.headers.map(header => (
+                                            <th
+                                                key={header.id}
+                                                className="text-white-cream font-bold font-geist text-sm px-4 py-2 whitespace-nowrap"
+                                            >
+                                                {flexRender(header.column.columnDef.header, header.getContext())}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody>
+                        {
+                            table.getRowModel().rows.map(row => (
+                                <tr
+                                    key={row.id}
+                                    className="transition hover:bg-[rgba(255,255,255,0.05)] border-b border-gray-600/30"
+                                >
+                                    {
+                                        row.getVisibleCells().map(cell => (
+                                            <td
+                                                key={cell.id}
+                                                className="text-white-cream text-center font-geist px-4 py-2 font-normal text-base whitespace-nowrap"
+                                            >
+                                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                            </td>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </tbody>
+                </table>
+            </div>
             <div
-                className="w-full h-4 my-2"
+                className="w-full h-1 my-2"
                 ref={observerRef}
             />
             {
                 isFetchingNextPage && (
                     <div
-                        className="w-full flex flex-row items-center justify-center gap-4 p-4"
+                        className="w-full flex flex-row items-center justify-center gap-4 px-4"
                     >
                         <span
                             className="flex justify-center items-center"
@@ -243,7 +245,7 @@ export default function Table({
             {
                 !hasNextPage && items.length > 0 && (
                     <div
-                        className="w-full p-4"
+                        className="w-full px-4"
                     >
                         <p className="font-geist text-white-cream text-sm text-center">No hay más datos</p>
                     </div>
@@ -252,7 +254,7 @@ export default function Table({
             {
                 items.length === 0 && (
                     <div
-                        className="w-full p-4"
+                        className="w-full px-4"
                     >
                         <p className="font-geist text-white-cream text-sm text-center">No hay datos</p>
                     </div>

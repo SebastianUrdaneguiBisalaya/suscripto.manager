@@ -69,6 +69,7 @@ type RequestCreateSubscription = APIRequest<{
 
 type RequestCancelSubscription = APIRequest<{
     subscription_id: string;
+    user_id: string;
 }>;
 
 type ResponsePlatforms = APIResponse<{
@@ -118,7 +119,7 @@ export const postRegisterForm = async ({
 export const postCancelSubscription = async ({
     data,
 }: RequestCancelSubscription): Promise<void> => {
-    await requester.post<void>(`/cancel`, data);
+    await requester.patch<void>(`/cancel/${data.user_id}`, data);
 }
 
 export const getPlatforms = async (): Promise<ResponsePlatforms> => {

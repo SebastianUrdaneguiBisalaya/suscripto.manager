@@ -4,7 +4,7 @@ import requester from "@/lib/requester";
 interface Item {
     id: string;
     company: string;
-    current_date: string;
+    transaction_date: string;
     start_date: string;
     next_date: string;
     recurrence: string;
@@ -12,6 +12,10 @@ interface Item {
     currency: string;
     card_type?: string;
     card_number?: string;
+}
+
+type ItemsResponseAPI = {
+    data: Item[];
 }
 
 type ItemsResponse = {
@@ -28,13 +32,14 @@ export const useItemsTable = (
         queryKey: ["transactions", user_id],
         initialPageParam: 0,
         queryFn: async ({ pageParam = 0}) => {
+            if (!user_id) return { items: [], hasMore: false };
             const from = (pageParam as number) * PAGE_SIZE;
             const to = from + PAGE_SIZE - 1;
-            const url = `/api/data/transactions/${user_id}?offset=${from}&limit=${to}`;
-            const response = await requester.get<ItemsResponse>(url);
-            const hasMore = response.data.items.length === PAGE_SIZE;
+            const url = `/transactions/${user_id}?offset=${from}&limit=${to}`;
+            const response = await requester.get<ItemsResponseAPI>(url);
+            const hasMore = response.data.data.length === PAGE_SIZE;
             return {
-                items: response.data.items,
+                items: response.data.data,
                 hasMore,
             };
         },

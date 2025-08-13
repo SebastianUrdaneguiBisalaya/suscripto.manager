@@ -76,14 +76,14 @@ export default function DashboardPage() {
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-500 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Gasto total - PEN"
-            subtitle="Suma acumulada (en soles)"
+            subtitle="De suscripciones activas"
             value={data.statistics?.[0]?.total_pen ?? 0}
           />
         </div>
         <div className="sm:col-span-2 lg:col-span-1 border border-gray-700 rounded-xl shadow-[3px_3px_0px_rgba(0,102,255,0.7)]">
           <CardStatistic
             title="Gasto total - USD"
-            subtitle="Suma acumulada (en dólares)"
+            subtitle="De suscriciones activas"
             value={data.statistics?.[0]?.total_usd ?? 0}
           />
         </div>
