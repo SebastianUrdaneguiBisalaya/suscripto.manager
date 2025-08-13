@@ -69,6 +69,16 @@ type RequestCancelSubscription = APIRequest<{
     subscription_id: string;
 }>;
 
+type ResponsePlatforms = APIResponse<{
+    platform_id: string;
+    platform_name: string;
+}[]>;
+
+type ResposePaymentMethods = APIResponse<{
+    payment_method_id: string;
+    payment_method_name: string;
+}[]>;
+
 export const getStatistics = async ({
     data,
 }: RequestStatistics): Promise<ResponseStatistics> => {
@@ -107,4 +117,14 @@ export const postCancelSubscription = async ({
     data,
 }: RequestCancelSubscription): Promise<void> => {
     await requester.post<void>(`/cancel`, data);
+}
+
+export const getPlatforms = async (): Promise<ResponsePlatforms> => {
+    const response = await requester.get<ResponsePlatforms>(`/platforms`);
+    return response.data;
+}
+
+export const getPaymentMethods = async (): Promise<ResposePaymentMethods> => {
+    const response = await requester.get<ResposePaymentMethods>(`/payment_methods`);
+    return response.data;
 }

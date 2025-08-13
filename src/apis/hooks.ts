@@ -6,6 +6,8 @@ import {
     getNotifications,
     postRegisterForm,
     postCancelSubscription,
+    getPlatforms,
+    getPaymentMethods,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
 
@@ -150,3 +152,30 @@ export const useCancelSubscription = () => {
         },
     });
 }
+
+export const usePlatforms = () => {
+    return useQuery({
+        queryKey: ["platforms"],
+        queryFn: async () => {
+            const response = await getPlatforms();
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: true,
+        staleTime: 60 * 60 * 1000,
+    });
+}
+
+export const usePaymentMethods = () => {
+    return useQuery({
+        queryKey: ["payment-methods"],
+        queryFn: async () => {
+            const response = await getPaymentMethods();
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: true,
+        staleTime: 60 * 60 * 1000,
+    });
+}
+
