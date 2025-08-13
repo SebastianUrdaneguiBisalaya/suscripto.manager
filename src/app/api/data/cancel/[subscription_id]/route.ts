@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-export async function PUT(req: Request) {
+export async function PATCH(req: Request) {
     const data = await req.json();
     const { subscription_id } = data;
     if (!subscription_id) {

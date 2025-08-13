@@ -105,17 +105,17 @@ export const useRegisterForm = () => {
                 },
             });
         },
-        // onSuccess: (_data, variables) => {
-        //     queryClient.invalidateQueries({
-        //         queryKey: ["statistics", variables.user_id],
-        //     });
-        //     queryClient.invalidateQueries({
-        //         queryKey: ["subscriptions", variables.user_id],
-        //     });
-        //     queryClient.invalidateQueries({
-        //         queryKey: ["total-by-month", variables.user_id],
-        //     });
-        // },
+        onSuccess: (_data, variables) => {
+            queryClient.invalidateQueries({
+                queryKey: ["statistics", variables.user_id],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["subscriptions", variables.user_id],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ["total-by-month", variables.user_id],
+            });
+        },
         onError: (error: AxiosError) => {
             console.error(error);
         },
@@ -127,24 +127,27 @@ export const useCancelSubscription = () => {
     return useMutation({
         mutationFn: async ({
             subscription_id,
+            user_id,
         }: {
             subscription_id: string;
+            user_id: string;
         }) => {
             await postCancelSubscription({
                 data: {
                     subscription_id,
+                    user_id,
                 },
             });
         },
         onSuccess: (_data, variables) => {
             queryClient.invalidateQueries({
-                queryKey: ["statistics", variables.subscription_id],
+                queryKey: ["statistics", variables.user_id],
             });
             queryClient.invalidateQueries({
-                queryKey: ["subscriptions", variables.subscription_id],
+                queryKey: ["subscriptions", variables.user_id],
             });
             queryClient.invalidateQueries({
-                queryKey: ["total-by-month", variables.subscription_id],
+                queryKey: ["total-by-month", variables.user_id],
             });
         },
         onError: (error: AxiosError) => {

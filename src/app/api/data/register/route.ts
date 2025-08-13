@@ -36,6 +36,7 @@ export async function POST(req: Request) {
                 p_card_number: card_number,
             }
         );
+        console.log(error);
         if (error) {
             return NextResponse.json({
                 error: (error as Error).message,

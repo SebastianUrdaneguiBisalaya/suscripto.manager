@@ -13,8 +13,17 @@ const cutFullName = (fullName: string) => {
     return name;
 };
 
+const formatDate = (date: Date) => {
+    const dateTime = new Date(date);
+    const day = dateTime.getDate().toString().padStart(2, "0");
+    const month = (dateTime.getMonth() + 1).toString().padStart(2, "0");
+    const year = dateTime.getFullYear();
+    return `${year}-${month}-${day}`;
+}
+
 export {
     firstLetterToUpperCase,
     formatAmout,
-    cutFullName
+    cutFullName,
+    formatDate,
 }

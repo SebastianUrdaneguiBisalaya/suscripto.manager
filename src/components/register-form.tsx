@@ -6,6 +6,7 @@ import Select from "@/components/select";
 import { useUserStore } from "@/store/useUserStore";
 import { useRegisterForm, useGetPlatforms, useGetPaymentMethods } from "@/apis/hooks";
 import { dataRecurrences, dataCurrencies } from "@/constants/data";
+import { formatDate } from "@/lib/fn";
 
 interface RegisterFormProps {
     isOpen: boolean;
@@ -31,17 +32,23 @@ export default function RegisterForm({
     const { data: payment_methods, isPending: isLoadingPaymentMethods } = useGetPaymentMethods();
     const { mutateAsync: registerForm, isPending: isLoadingRegisterForm } = useRegisterForm();
 
+    const date = formatDate(new Date());
+
     const [data, setData] = useState<DataProps>({
-        company: platforms?.[0]?.platform_name ?? "",
+        company: "",
         recurrence: dataRecurrences[0].value,
         currency: dataCurrencies[0].value,
         amount: "",
-        date_start: "",
-        payment_method: payment_methods?.[0]?.payment_method_name ?? "",
+        date_start: date,
+        payment_method: "",
         card_number: null,
     });
 
     const handleRegisterForm = async () => {
+        if (!user?.user_id || !data.company || !data.recurrence || !data.amount || !data.currency || !data.date_start) {
+            console.log(user?.user_id, data.company, data.recurrence, data.amount, data.currency, data.date_start);
+            return;
+        }
         try {
             await registerForm({
                 user_id: user?.user_id ?? "",
@@ -53,11 +60,30 @@ export default function RegisterForm({
                 payment_method_id: data.payment_method,
                 card_number: data.card_number,
             });
+            setData({
+                company: platforms?.[0]?.platform_id ?? "",
+                recurrence: dataRecurrences[0].value,
+                currency: dataCurrencies[0].value,
+                amount: "",
+                date_start: date,
+                payment_method: payment_methods?.[0]?.payment_method_id?? "",
+                card_number: null,
+            });
             toggleRegisterForm();
         } catch (error: unknown) {
             console.error(`Ocurrió un error al registrar la suscripción: ${error}`);
         }
     }
+
+    useEffect(() => {
+        if (platforms && payment_methods) {
+            setData((prevData) => ({
+                ...prevData,
+                company: platforms?.[0]?.platform_id ?? "",
+                payment_method: payment_methods?.[0]?.payment_method_id ?? "",
+            }))
+        }
+    }, [platforms, payment_methods]);
 
     useEffect(() => {
         if (isOpen) {
@@ -116,13 +142,6 @@ export default function RegisterForm({
                         type="number"
                         value={data.amount}
                         setValue={(value) => setData((prev) => ({ ...prev, amount: value }))}
-                    />
-                    <Input
-                        label="Fecha inicio *"
-                        placeholder="dd/mm/aaaa"
-                        type="date"
-                        value={data.date_start}
-                        setValue={(value) => setData((prev) => ({ ...prev, date_start: value }))}
                     />
                     <div className="flex flex-row items-center w-full gap-4">
                         <div className="h-[0.05rem] w-full bg-gray-500" />

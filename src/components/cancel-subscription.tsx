@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useCancelSubscription } from "@/apis/hooks";
+import { useUserStore } from "@/store/useUserStore";
 
 interface CancelSubscriptionProps {
     subscription_id: string;
@@ -16,12 +17,14 @@ export default function CancelSubscription({
     isShown,
     toggle,
 }: CancelSubscriptionProps) {
+    const { user } = useUserStore();
     const { mutateAsync: cancelSubscription } = useCancelSubscription();
 
     const handleCancelSubscription = async () => {
         try {
             await cancelSubscription({
                 subscription_id,
+                user_id: user?.user_id ?? "",
             });
             toggle();
         } catch (error: unknown) {
