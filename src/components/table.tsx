@@ -10,7 +10,6 @@ import {
 import { useItemsTable } from "@/hooks/useItemsTable";
 import { formatAmout } from "@/lib/fn";
 import icons from "@/constants/icons";
-import { dataTable } from "@/constants/data";
 
 interface Item {
     id: string;
@@ -105,73 +104,73 @@ interface TableProps {
 export default function Table({
     user_id,
 }: TableProps) {
-    // const {
-    //     data,
-    //     fetchNextPage,
-    //     hasNextPage,
-    //     isFetchingNextPage,
-    //     isLoading,
-    //     isError,
-    // } = useItemsTable(user_id);
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        isLoading,
+        isError,
+    } = useItemsTable(user_id);
 
-    // const items = useMemo(() => data?.pages.flatMap(page => page.items) ?? [],
-    // [data]);
+    const items = useMemo(() => data?.pages.flatMap(page => page.items) ?? [],
+    [data]);
 
     const table = useReactTable({
-        data: dataTable,
+        data: items,
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
 
     const observerRef = useRef<HTMLDivElement | null>(null);
 
-    // useEffect(() => {
-    //     if (!observerRef.current || !hasNextPage) return;
-    //     const observer = new IntersectionObserver(
-    //         entries => {
-    //             if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-    //                 fetchNextPage();
-    //             }
-    //         },
-    //         {
-    //             threshold: 0.5,
-    //         }
-    //     );
-    //     const currentTarget = observerRef.current;
-    //     if (currentTarget) {
-    //         observer.observe(currentTarget);
-    //     }
-    //     return () => {
-    //         if (currentTarget) {
-    //             observer.unobserve(currentTarget);
-    //         }
-    //     }
-    // }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+    useEffect(() => {
+        if (!observerRef.current || !hasNextPage) return;
+        const observer = new IntersectionObserver(
+            entries => {
+                if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+                    fetchNextPage();
+                }
+            },
+            {
+                threshold: 0.5,
+            }
+        );
+        const currentTarget = observerRef.current;
+        if (currentTarget) {
+            observer.observe(currentTarget);
+        }
+        return () => {
+            if (currentTarget) {
+                observer.unobserve(currentTarget);
+            }
+        }
+    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-    // if (isLoading) {
-    //     return (
-    //         <div
-    //             className="w-full flex flex-row items-center justify-center gap-4 p-4"
-    //         >
-    //             <span
-    //                 className="flex justify-center items-center"
-    //             >
-    //                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#ffffff" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
-    //             </span>
-    //             <p className="font-geist text-white-cream text-sm text-center">Cargando datos...</p>
-    //         </div>
-    //     )
-    // }
+    if (isLoading) {
+        return (
+            <div
+                className="w-full flex flex-row items-center justify-center gap-4 p-4"
+            >
+                <span
+                    className="flex justify-center items-center"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#ffffff" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+                </span>
+                <p className="font-geist text-white-cream text-sm text-center">Cargando datos...</p>
+            </div>
+        )
+    }
 
-    // if (isError) {
-    //     return (
-    //         <div
-    //             className="w-full p-4"
-    //         >
-    //             <p className="font-geist text-white-cream text-sm text-center">Error al cargar los datos</p>
-    //         </div>
-    //     )
-    // }
+    if (isError) {
+        return (
+            <div
+                className="w-full p-4"
+            >
+                <p className="font-geist text-white-cream text-sm text-center">Error al cargar los datos</p>
+            </div>
+        )
+    }
 
     return (
         <div
@@ -227,7 +226,7 @@ export default function Table({
                 className="w-full h-4 my-2"
                 ref={observerRef}
             />
-            {/* {
+            {
                 isFetchingNextPage && (
                     <div
                         className="w-full flex flex-row items-center justify-center gap-4 p-4"
@@ -258,7 +257,7 @@ export default function Table({
                         <p className="font-geist text-white-cream text-sm text-center">No hay datos</p>
                     </div>
                 )
-            } */}
+            }
         </div>
     )
 }

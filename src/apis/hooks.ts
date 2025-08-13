@@ -1,82 +1,58 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueries, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
     getStatistics,
     getSubscriptions,
     getTotalByMonth,
-    getTransactions,
     getNotifications,
     postRegisterForm,
     postCancelSubscription,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
 
-export const useStatistics = (user_id: string) => {
-    return useQuery({
-        queryKey: ["statistics", user_id],
-        queryFn: async () => {
-            const response = await getStatistics({
-                data: {
-                    user_id,
-                },
-            });
-            return response.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: true && !!user_id,
-    });
+export const useDashboardData = ({ user_id }: { user_id: string }) => {
+    return useQueries({
+        queries: [
+            {
+                queryKey: ["statistics", user_id],
+                queryFn: async () => (
+                    await getStatistics({
+                        data: {
+                            user_id,
+                        },
+                    })
+                ),
+                refetchOnWindowFocus: false,
+                enabled: !!user_id,
+            },
+            {
+                queryKey: ["subscriptions", user_id],
+                queryFn: async () => (
+                    await getSubscriptions({
+                        data: {
+                            user_id,
+                        },
+                    })
+                ),
+                refetchOnWindowFocus: false,
+                enabled: !!user_id,
+            },
+            {
+                queryKey: ["total-by-month", user_id],
+                queryFn: async () => (
+                    await getTotalByMonth({
+                        data: {
+                            user_id,
+                        },
+                    })
+                ),
+                refetchOnWindowFocus: false,
+                enabled: !!user_id,
+            },
+        ]
+    })
 }
 
-export const useSubscriptions = (user_id: string) => {
-    return useQuery({
-        queryKey: ["subscriptions", user_id],
-        queryFn: async () => {
-            const response = await getSubscriptions({
-                data: {
-                    user_id,
-                },
-            });
-            return response.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: true && !!user_id,
-    });
-}
-
-export const useTotalByMonth = (user_id: string) => {
-    return useQuery({
-        queryKey: ["total-by-month", user_id],
-        queryFn: async () => {
-            const response = await getTotalByMonth({
-                data: {
-                    user_id,
-                },
-            });
-            return response.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: true && !!user_id,
-    });
-}
-
-export const useTransactions = (user_id: string, limit: number, offset: number) => {
-    return useQuery({
-        queryKey: ["transactions", user_id, limit, offset],
-        queryFn: async () => {
-            const response = await getTransactions({
-                data: {
-                    user_id,
-                    limit,
-                    offset,
-                },
-            });
-            return response.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: true && !!user_id && !!limit && !!offset,
-    });
-}
-
-export const useNotifications = (user_id: string) => {
+export const useNotifications = ({ user_id }: { user_id: string }) => {
     return useQuery({
         queryKey: ["notifications", user_id],
         queryFn: async () => {
@@ -111,8 +87,8 @@ export const useRegisterForm = () => {
             amount: number;
             currency: string;
             date_start: string;
-            payment_method_id: string;
-            card_number: string;
+            payment_method_id: string | null;
+            card_number: string | null;
         }) => {
             await postRegisterForm({
                 data: {

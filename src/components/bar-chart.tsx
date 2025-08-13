@@ -9,8 +9,10 @@ type BarChartProps = {
 	data: {
 		month: string;
         value: number;
+		currency: string;
 	}[];
 	dataKey: string;
+	currency: string;
 }
 
 export default function BarChartComponent({
@@ -18,7 +20,9 @@ export default function BarChartComponent({
     subtitle,
 	data,
 	dataKey,
+	currency,
 }: BarChartProps) {
+	const filterData = data?.filter((item) => item.currency === currency);
 	return (
 		<div className="w-full h-full flex flex-col gap-4 p-4 border-1 border-gray-500 rounded-lg">
 			<div className="flex flex-row items-center gap-2 pb-2 border-b border-gray-500">
@@ -38,7 +42,7 @@ export default function BarChartComponent({
 				<ResponsiveContainer width="100%" height="100%">
 					<BarChart
 						accessibilityLayer
-						data={data}
+						data={filterData}
 						margin={{
 							left: 12,
 							right: 12,

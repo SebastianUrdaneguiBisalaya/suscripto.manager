@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useCancelSubscription } from "@/apis/hooks";
 
 interface CancelSubscriptionProps {
     subscription_id: string;
@@ -15,9 +16,17 @@ export default function CancelSubscription({
     isShown,
     toggle,
 }: CancelSubscriptionProps) {
+    const { mutateAsync: cancelSubscription } = useCancelSubscription();
 
-    const handleCancelSubscription = () => {
-        console.log(subscription_id);
+    const handleCancelSubscription = async () => {
+        try {
+            await cancelSubscription({
+                subscription_id,
+            });
+            toggle();
+        } catch (error: unknown) {
+            console.error(`Ocurrió un error al cancelar la suscripción: ${error}`);
+        }
     }
     
     useEffect(() => {

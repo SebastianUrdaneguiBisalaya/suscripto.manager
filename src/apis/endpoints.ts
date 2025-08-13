@@ -26,6 +26,7 @@ type RequestSubscriptions = APIRequest<{
 }>;
 
 type ResponseSubscriptions = APIResponse<{
+    id: string;
     platform_name: string;
     currency: string;
     amount: number;
@@ -40,25 +41,6 @@ type ResponseTotalByMonth = APIResponse<{
     month: string;
     currency: string;
     value: number;
-}[]>;
-
-type RequestTransactions = APIRequest<{
-    user_id: string;
-    limit: number;
-    offset: number;
-}>;
-
-type ResponseTransactions = APIResponse<{
-    id: string;
-    company: string;
-    transaction_date: string;
-    start_date: string;
-    next_date: string;
-    recurrence: string;
-    amount: number;
-    currency: string;
-    card_type?: string;
-    card_number?: string;
 }[]>;
 
 type RequestNotifications = APIRequest<{
@@ -79,8 +61,8 @@ type RequestCreateSubscription = APIRequest<{
     amount: number;
     currency: string;
     date_start: string;
-    payment_method_id: string;
-    card_number: string;
+    payment_method_id: string | null;
+    card_number: string | null;
 }>;
 
 type RequestCancelSubscription = APIRequest<{
@@ -105,13 +87,6 @@ export const getTotalByMonth = async ({
     data,
 }: RequestTotalByMonth): Promise<ResponseTotalByMonth> => {
     const response = await requester.get<ResponseTotalByMonth>(`/api/data/total-by-month/${data.user_id}`);
-    return response.data;
-}
-
-export const getTransactions = async ({
-    data,
-}: RequestTransactions): Promise<ResponseTransactions> => {
-    const response = await requester.get<ResponseTransactions>(`/api/data/transactions/${data.user_id}?limit=${data.limit}&offset=${data.offset}`);
     return response.data;
 }
 
