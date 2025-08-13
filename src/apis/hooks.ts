@@ -153,7 +153,7 @@ export const useCancelSubscription = () => {
     });
 }
 
-export const usePlatforms = () => {
+export const useGetPlatforms = () => {
     return useQuery({
         queryKey: ["platforms"],
         queryFn: async () => {
@@ -166,7 +166,7 @@ export const usePlatforms = () => {
     });
 }
 
-export const usePaymentMethods = () => {
+export const useGetPaymentMethods = () => {
     return useQuery({
         queryKey: ["payment-methods"],
         queryFn: async () => {

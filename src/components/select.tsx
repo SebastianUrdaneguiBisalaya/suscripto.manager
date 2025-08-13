@@ -1,6 +1,6 @@
 interface SelectProps {
     label: string;
-    options: string[];
+    options: Record<string, string>[];
     value: string;
     setValue: (value: string) => void;
 }
@@ -12,7 +12,12 @@ export default function Input({
     setValue,
 }: SelectProps) {
     const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setValue(event.target.value);
+        const selectedValue = event.target.value;
+        const selectedOption = options.find((option) => Object.values(option)[0] === selectedValue);
+        if (selectedOption) {
+            const key = Object.keys(selectedOption)[0];
+            setValue(key);
+        }
     };
     return (
         <div className="w-full flex flex-col gap-2">
@@ -24,14 +29,18 @@ export default function Input({
                 value={value}
             >
                 {
-                    options.map((option, index) => (
-                        <option
-                            key={index}
-                            value={option}
-                        >
-                            {option}
-                        </option>
-                    ))
+                    options.map((option) => {
+                        const key = Object.keys(option)[0];
+                        const optionValue = Object.values(option)[0];
+                        return (
+                            <option
+                                key={key}
+                                value={optionValue}
+                            >
+                                {optionValue}
+                            </option>
+                        )
+                    })
                 }
             </select>
         </div>

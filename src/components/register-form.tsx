@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Input from "@/components/input";
 import Select from "@/components/select";
 import { useUserStore } from "@/store/useUserStore";
-import { useRegisterForm } from "@/apis/hooks";
+import { useRegisterForm, useGetPlatforms, useGetPaymentMethods } from "@/apis/hooks";
+import { dataRecurrences, dataCurrencies } from "@/constants/data";
 
 interface RegisterFormProps {
     isOpen: boolean;
@@ -26,7 +27,9 @@ export default function RegisterForm({
     toggleRegisterForm,
 }: RegisterFormProps) {
     const { user } = useUserStore();
-    const { mutateAsync: registerForm } = useRegisterForm();
+    const { data: platforms, isPending: isLoadingPlatforms } = useGetPlatforms();
+    const { data: payment_methods, isPending: isLoadingPaymentMethods } = useGetPaymentMethods();
+    const { mutateAsync: registerForm, isPending: isLoadingRegisterForm } = useRegisterForm();
 
     const [data, setData] = useState<DataProps>({
         company: "",
@@ -84,23 +87,22 @@ export default function RegisterForm({
                     </button>
                 </div>
                 <div className="flex flex-col gap-4 pt-4">
-                    <Input
+                    <Select
                         label="Nombre de la plataforma *"
-                        placeholder="Netflix, Spotify, Youtube..."
-                        type="text"
+                        options={platforms ?? []}
                         value={data.company}
                         setValue={(value) => setData((prev) => ({ ...prev, company: value }))}
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Recurrencia *"
-                            options={["", "Diaria", "Semanal", "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual"]}
+                            options={dataRecurrences}
                             value={data.recurrence}
                             setValue={(value) => setData((prev) => ({ ...prev, recurrence: value }))}
                         />
                         <Select
                             label="Moneda *"
-                            options={["", "PEN", "USD"]}
+                            options={dataCurrencies}
                             value={data.currency}
                             setValue={(value) => setData((prev) => ({ ...prev, currency: value }))}
                         />
@@ -127,7 +129,7 @@ export default function RegisterForm({
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Método de pago"
-                            options={["", "Visa", "MasterCard", "PayPal", "Otros"]}
+                            options={payment_methods ?? []}
                             value={data.payment_method ?? ""}
                             setValue={(value) => setData((prev) => ({ ...prev, payment_method: value }))}
                         />
@@ -139,13 +141,18 @@ export default function RegisterForm({
                             setValue={(value) => setData((prev) => ({ ...prev, card_number: value }))}
                         />
                     </div>
-                    <button
-                        className="bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg"
-                        onClick={handleRegisterForm}
-                        type="button"
-                    >
-                        Guardar suscripción
-                    </button>
+                    {
+                        !isLoadingPaymentMethods && !isLoadingPlatforms && (
+                            <button
+                                className={`bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg ${isLoadingRegisterForm ? "opacity-50 cursor-not-allowed" : ""}`}
+                                onClick={handleRegisterForm}
+                                disabled={isLoadingRegisterForm}
+                                type="button"
+                            >
+                                {isLoadingRegisterForm ? "Guardando..." : "Guardar suscripción"}
+                            </button>
+                        ) 
+                    }
                 </div>
             </div>
         </div>
