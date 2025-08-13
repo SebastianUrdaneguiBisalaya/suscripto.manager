@@ -105,17 +105,17 @@ export const useRegisterForm = () => {
                 },
             });
         },
-        onSuccess: (_data, variables) => {
-            queryClient.invalidateQueries({
-                queryKey: ["statistics", variables.user_id],
-            });
-            queryClient.invalidateQueries({
-                queryKey: ["subscriptions", variables.user_id],
-            });
-            queryClient.invalidateQueries({
-                queryKey: ["total-by-month", variables.user_id],
-            });
-        },
+        // onSuccess: (_data, variables) => {
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["statistics", variables.user_id],
+        //     });
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["subscriptions", variables.user_id],
+        //     });
+        //     queryClient.invalidateQueries({
+        //         queryKey: ["total-by-month", variables.user_id],
+        //     });
+        // },
         onError: (error: AxiosError) => {
             console.error(error);
         },

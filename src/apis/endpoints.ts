@@ -110,7 +110,7 @@ export const getNotifications = async ({
 export const postRegisterForm = async ({
     data,
 }: RequestCreateSubscription): Promise<void> => {
-    await requester.post<void>(`/data/register`, data);
+    await requester.post<void>(`/register`, data);
 }
 
 export const postCancelSubscription = async ({

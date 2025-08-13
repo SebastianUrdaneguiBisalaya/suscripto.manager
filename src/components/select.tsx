@@ -1,13 +1,25 @@
+interface DataProps {
+    company: string;
+    recurrence: string;
+    currency: string;
+    amount: string;
+    date_start: string;
+    payment_method: string | null;
+    card_number: string | null;
+}
+
 interface SelectProps {
     label: string;
     options: Record<string, string>[];
+    field: keyof DataProps;
     value: string;
-    setValue: (value: string) => void;
+    setValue: React.Dispatch<React.SetStateAction<DataProps>>;
 }
 
-export default function Input({
+export default function Select({
     label,
     options,
+    field,
     value,
     setValue,
 }: SelectProps) {
@@ -15,8 +27,8 @@ export default function Input({
         const selectedValue = event.target.value;
         const selectedOption = options.find((option) => Object.values(option)[0] === selectedValue);
         if (selectedOption) {
-            const key = Object.keys(selectedOption)[0];
-            setValue(key);
+            const key = Object.values(selectedOption)[0];
+            setValue((prev) => ({ ...prev, [field]: key }));
         }
     };
     return (
@@ -30,12 +42,12 @@ export default function Input({
             >
                 {
                     options.map((option) => {
-                        const key = Object.keys(option)[0];
-                        const optionValue = Object.values(option)[0];
+                        const key = Object.values(option)[0];
+                        const optionValue = Object.values(option)[1];
                         return (
                             <option
                                 key={key}
-                                value={optionValue}
+                                value={key}
                             >
                                 {optionValue}
                             </option>

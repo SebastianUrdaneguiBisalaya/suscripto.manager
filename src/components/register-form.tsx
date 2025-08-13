@@ -16,7 +16,7 @@ interface DataProps {
     company: string;
     recurrence: string;
     currency: string;
-    amount: number;
+    amount: string;
     date_start: string;
     payment_method: string | null;
     card_number: string | null;
@@ -32,12 +32,12 @@ export default function RegisterForm({
     const { mutateAsync: registerForm, isPending: isLoadingRegisterForm } = useRegisterForm();
 
     const [data, setData] = useState<DataProps>({
-        company: "",
-        recurrence: "",
-        currency: "",
-        amount: 0,
+        company: platforms?.[0]?.platform_name ?? "",
+        recurrence: dataRecurrences[0].value,
+        currency: dataCurrencies[0].value,
+        amount: "",
         date_start: "",
-        payment_method: null,
+        payment_method: payment_methods?.[0]?.payment_method_name ?? "",
         card_number: null,
     });
 
@@ -47,7 +47,7 @@ export default function RegisterForm({
                 user_id: user?.user_id ?? "",
                 company_id: data.company,
                 recurrence: data.recurrence,
-                amount: data.amount,
+                amount: Number(data.amount),
                 currency: data.currency,
                 date_start: data.date_start,
                 payment_method_id: data.payment_method,
@@ -90,21 +90,24 @@ export default function RegisterForm({
                     <Select
                         label="Nombre de la plataforma *"
                         options={platforms ?? []}
+                        field="company"
                         value={data.company}
-                        setValue={(value) => setData((prev) => ({ ...prev, company: value }))}
+                        setValue={setData}
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
                         <Select
                             label="Recurrencia *"
                             options={dataRecurrences}
+                            field="recurrence"
                             value={data.recurrence}
-                            setValue={(value) => setData((prev) => ({ ...prev, recurrence: value }))}
+                            setValue={setData}
                         />
                         <Select
                             label="Moneda *"
                             options={dataCurrencies}
+                            field="currency"
                             value={data.currency}
-                            setValue={(value) => setData((prev) => ({ ...prev, currency: value }))}
+                            setValue={setData}
                         />
                     </div>
                     <Input
@@ -112,7 +115,7 @@ export default function RegisterForm({
                         placeholder="0"
                         type="number"
                         value={data.amount}
-                        setValue={(value) => setData((prev) => ({ ...prev, amount: Number(value) }))}
+                        setValue={(value) => setData((prev) => ({ ...prev, amount: value }))}
                     />
                     <Input
                         label="Fecha inicio *"
@@ -130,8 +133,9 @@ export default function RegisterForm({
                         <Select
                             label="Método de pago"
                             options={payment_methods ?? []}
+                            field="payment_method"
                             value={data.payment_method ?? ""}
-                            setValue={(value) => setData((prev) => ({ ...prev, payment_method: value }))}
+                            setValue={setData}
                         />
                         <Input
                             label="Últimos 3 dígitos"
