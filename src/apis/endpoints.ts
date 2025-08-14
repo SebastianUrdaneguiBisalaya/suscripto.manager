@@ -35,6 +35,7 @@ type RequestSubscriptions = APIRequest<{
 
 type ResponseSubscriptions = APIResponse<{
     id: string;
+    google_event_id: string;
     platforms: {
         platform_name: string;
     };
@@ -75,6 +76,10 @@ type RequestCreateSubscription = APIRequest<{
     card_number: string | null;
 }>;
 
+type ResponseRegisterForm = APIResponse<{
+    subscription_id: string;
+}>;
+
 type RequestCancelSubscription = APIRequest<{
     subscription_id: string;
     user_id: string;
@@ -101,6 +106,7 @@ type ResponseCreateCalendar = APIResponse<{
 type RequestCreateCalendarEvent = APIRequest<{
     calendar_id: string;
     body: {
+        subscription_id: string;
         summary: string;
         description: string;
         date: string;
@@ -152,8 +158,9 @@ export const getNotifications = async ({
 
 export const postRegisterForm = async ({
     data,
-}: RequestCreateSubscription): Promise<void> => {
-    await requester.post<void>(`/register`, data);
+}: RequestCreateSubscription): Promise<ResponseRegisterForm> => {
+    const response = await requester.post<ResponseRegisterForm>(`/register`, data);
+    return response.data;
 }
 
 export const postCancelSubscription = async ({

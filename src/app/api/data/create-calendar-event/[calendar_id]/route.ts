@@ -16,7 +16,8 @@ type RecurrenceType = keyof typeof recurrenceOptions;
 
 export async function POST(req: Request) {
     const data = await req.json();
-    const { calendar_id, summary, description, date, recurrence }: { 
+    const { subscription_id, calendar_id, summary, description, date, recurrence }: { 
+        subscription_id: string;
         calendar_id: string; 
         summary: string; 
         description: string; 
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
         });
     }
     try {
-        await axios.post(`https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events`, {
+        const res = await axios.post(`https://www.googleapis.com/calendar/v3/calendars/${calendar_id}/events`, {
             "summary": summary,
             "description": description,
             "start": {
@@ -75,8 +76,18 @@ export async function POST(req: Request) {
                 Authorization: `Bearer ${googleProviderToken}`,
             },
         })
+        const { error: SubscriptionError } = await supabase.from("subscriptions").update({
+            google_event_id: res.data.id,
+        }).eq("id", subscription_id);
+        if (SubscriptionError) {
+            return NextResponse.json({
+                error: "Error al actualizar la suscripción.",
+                status: 500,
+                isError: true,
+            });
+        }
         return NextResponse.json({
-            data: "Evento creado correctamente.",
+            data: "Registro creado correctamente.",
             status: 201,
             isError: false,
         });

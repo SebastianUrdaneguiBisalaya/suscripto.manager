@@ -7,6 +7,7 @@ import CancelSubscription from "@/components/cancel-subscription";
 
 interface ItemProps {
     id: string;
+    google_event_id: string;
     platforms: {
         platform_name: string;
     };
@@ -23,6 +24,7 @@ interface ItemsProps {
 
 interface CancelSubscriptionProps {
     subscription_id: string;
+    event_id: string;
     platform_name: string;
 }
 
@@ -34,6 +36,7 @@ export default function TableSubscription({
     const [isShownModal, setIsShownModal] = useState<boolean>(false);
     const [dataToCancel, setDataToCancel] = useState<CancelSubscriptionProps>({
         subscription_id: "",
+        event_id: "",
         platform_name: "",
     });
     const headers = ["Plataforma", "Moneda", "Monto", "Frecuencia"];
@@ -53,10 +56,11 @@ export default function TableSubscription({
     }
 
     const handleDeleteSubscription = (company: string) => {
-        const findSubscriptionId = data.find((item) => item.platforms.platform_name === company)?.id;
+        const findSubscriptionId = data.find((item) => item.platforms.platform_name === company);
         console.log(findSubscriptionId);
         setDataToCancel({
-            subscription_id: findSubscriptionId ?? "",
+            subscription_id: findSubscriptionId?.id ?? "",
+            event_id: findSubscriptionId?.google_event_id ?? "",
             platform_name: company,
         });
         toggleOpen();
@@ -165,6 +169,7 @@ export default function TableSubscription({
                 isShownModal && (
                     <CancelSubscription
                         subscription_id={dataToCancel.subscription_id}
+                        event_id={dataToCancel.event_id}
                         platform_name={dataToCancel.platform_name}
                         isShown={isShownModal}
                         toggle={toggleOpen}
