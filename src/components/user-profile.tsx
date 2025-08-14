@@ -32,12 +32,13 @@ export default function UserProfile() {
                 router.replace("/");
                 return;
             }
+            console.log(dataGoogleCalendar);
             const userData = {
                 user_id: data?.user?.id as string,
                 user_email: data?.user?.email as string,
                 user_name: data?.user?.user_metadata.full_name as string,
                 user_avatar: data?.user?.user_metadata.avatar_url as string,
-                google_calendar_id: dataGoogleCalendar?.google_calendar_id as string,
+                google_calendar_id: dataGoogleCalendar?.google_calendar_id ? dataGoogleCalendar.google_calendar_id : null,
             }
             setUser(userData);
         }

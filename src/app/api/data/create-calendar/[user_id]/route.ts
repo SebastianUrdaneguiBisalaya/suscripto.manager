@@ -38,7 +38,8 @@ export async function POST(req: Request) {
         });
     }
     try {
-        const response = await axios.post(`https://www.googleapis.com/calendar/v3/calendars`, {
+        console.log("Hola")
+        const response = await axios.post("https://www.googleapis.com/calendar/v3/calendars", {
             "summary": "Suscripciones",
             "description": "Calendario para gestionar los eventos de suscripciones del usuario.",
             "timeZone": "America/Lima",
@@ -51,6 +52,7 @@ export async function POST(req: Request) {
         const { error } = await supabase.from("users").update({
             google_calendar_id: response.data.id,
         })
+        console.log("error update", error);
         if (error) {
             return NextResponse.json({
                 error: (error as Error).message || "Error al actualizar la información del usuario.",
@@ -65,6 +67,7 @@ export async function POST(req: Request) {
         });
 
     } catch (error: unknown) {
+        console.log(error);
         const errorMessage = (axios.isAxiosError(error) && error.response)
             ? error.response.data.error.message
             : (error as Error).message;

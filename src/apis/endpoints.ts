@@ -182,7 +182,7 @@ export const getPaymentMethods = async (): Promise<ResposePaymentMethods> => {
 export const postCreateCalendar = async ({
     data,
 }: RequestCreateCalendar): Promise<ResponseCreateCalendar> => {
-    const response = await requester.post<ResponseCreateCalendar>(`/create-calendar`, data);
+    const response = await requester.post<ResponseCreateCalendar>(`/create-calendar/${data.user_id}`, data);
     return response.data;
 }
 

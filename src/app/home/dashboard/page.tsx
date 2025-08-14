@@ -17,6 +17,7 @@ interface DataProps {
   }[] | null,
   tableSubscription: {
     id: string;
+    google_event_id: string;
     platforms: {
       platform_name: string;
     };
