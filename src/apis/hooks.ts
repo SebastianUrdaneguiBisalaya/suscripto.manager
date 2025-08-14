@@ -9,6 +9,9 @@ import {
     postCancelSubscription,
     getPlatforms,
     getPaymentMethods,
+    postCreateCalendar,
+    postCreateCalendarEvent,
+    postDeleteCalendarEvent,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
 
@@ -199,3 +202,73 @@ export const useGetPaymentMethods = () => {
     });
 }
 
+export const useCreateCalendar = () => {
+    return useMutation({
+        mutationFn: async ({
+            user_id,
+        }: {
+            user_id: string;
+        }) => {
+            const response = await postCreateCalendar({
+                data: {
+                    user_id,
+                },
+            });
+            return response.data;
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}
+
+export const useCreateCalendarEvent = () => {
+    return useMutation({
+        mutationFn: async ({
+            calendar_id,
+            body,
+        }: {
+            calendar_id: string;
+            body: {
+                summary: string;
+                description: string;
+                date: string;
+                recurrence: string;
+            };
+        }) => {
+            await postCreateCalendarEvent({
+                data: {
+                    calendar_id,
+                    body,
+                },
+            });
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}
+
+export const useDeleteCalendarEvent = () => {
+    return useMutation({
+        mutationFn: async ({
+            calendar_id,
+            body,
+        }: {
+            calendar_id: string;
+            body: {
+                event_id: string;
+            };
+        }) => {
+            await postDeleteCalendarEvent({
+                data: {
+                    calendar_id,
+                    body,
+                },
+            });
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}
