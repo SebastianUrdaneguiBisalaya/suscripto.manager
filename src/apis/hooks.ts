@@ -1,5 +1,6 @@
 import { useQuery, useQueries, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
+    getUser,
     getStatistics,
     getSubscriptions,
     getTotalByMonth,
@@ -10,6 +11,22 @@ import {
     getPaymentMethods,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
+
+export const useUserData = ({ user_id }: { user_id: string }) => {
+    return useQuery({
+        queryKey: ["user", user_id],
+        queryFn: async () => {
+            const response = await getUser({
+                data: {
+                    user_id,
+                },
+            });
+            return response.data;
+        },
+        refetchOnWindowFocus: false,
+        enabled: !!user_id,
+    });
+}
 
 export const useDashboardData = ({ user_id }: { user_id: string }) => {
     return useQueries({

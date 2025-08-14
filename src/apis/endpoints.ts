@@ -10,6 +10,14 @@ type APIResponse<T> = {
     error: string | null;
 }
 
+type RequestUser = APIRequest<{
+    user_id: string;
+}>;
+
+type ResponseUser = APIResponse<{
+    google_calendar_id: string;
+}>;
+
 type RequestStatistics = APIRequest<{
     user_id: string;
 }>;
@@ -81,6 +89,13 @@ type ResposePaymentMethods = APIResponse<{
     payment_method_id: string;
     payment_method_name: string;
 }[]>;
+
+export const getUser = async ({
+    data,
+}: RequestUser): Promise<ResponseUser> => {
+    const response = await requester.get<ResponseUser>(`/user/${data.user_id}`);
+    return response.data;
+}
 
 export const getStatistics = async ({
     data,
