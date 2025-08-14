@@ -9,8 +9,12 @@ import {
     postCancelSubscription,
     getPlatforms,
     getPaymentMethods,
+    postCreateCalendar,
+    postCreateCalendarEvent,
+    postDeleteCalendarEvent,
 } from "@/apis/endpoints";
 import { AxiosError } from "axios";
+import { useUserStore } from "@/store/useUserStore";
 
 export const useUserData = ({ user_id }: { user_id: string }) => {
     return useQuery({
@@ -109,7 +113,7 @@ export const useRegisterForm = () => {
             payment_method_id: string | null;
             card_number: string | null;
         }) => {
-            await postRegisterForm({
+            const res = await postRegisterForm({
                 data: {
                     user_id,
                     company_id,
@@ -121,6 +125,7 @@ export const useRegisterForm = () => {
                     card_number,
                 },
             });
+            return res.data;
         },
         onSuccess: (_data, variables) => {
             queryClient.invalidateQueries({
@@ -199,3 +204,83 @@ export const useGetPaymentMethods = () => {
     });
 }
 
+export const useCreateCalendar = () => {
+    const { user, setUser } = useUserStore();
+    return useMutation({
+        mutationFn: async ({
+            user_id,
+        }: {
+            user_id: string;
+        }) => {
+            const response = await postCreateCalendar({
+                data: {
+                    user_id,
+                },
+            });
+            return response.data;
+        },
+        onSuccess: (data) => {
+            if (user && data?.id) {
+                setUser({
+                    ...user,
+                    google_calendar_id: data.id,
+                })
+            }
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}
+
+export const useCreateCalendarEvent = () => {
+    return useMutation({
+        mutationFn: async ({
+            calendar_id,
+            body,
+        }: {
+            calendar_id: string;
+            body: {
+                subscription_id: string;
+                summary: string;
+                description: string;
+                date: string;
+                recurrence: string;
+            };
+        }) => {
+            await postCreateCalendarEvent({
+                data: {
+                    calendar_id,
+                    body,
+                },
+            });
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}
+
+export const useDeleteCalendarEvent = () => {
+    return useMutation({
+        mutationFn: async ({
+            calendar_id,
+            body,
+        }: {
+            calendar_id: string;
+            body: {
+                event_id: string;
+            };
+        }) => {
+            await postDeleteCalendarEvent({
+                data: {
+                    calendar_id,
+                    body,
+                },
+            });
+        },
+        onError: (error: AxiosError) => {
+            console.error(error);
+        },
+    });
+}

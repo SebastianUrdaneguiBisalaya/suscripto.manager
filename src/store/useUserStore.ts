@@ -6,7 +6,7 @@ type User = {
   user_email: string;
   user_name: string;
   user_avatar: string;
-  google_calendar_id: string;
+  google_calendar_id: string | null;
 };
 
 type UserStore = {

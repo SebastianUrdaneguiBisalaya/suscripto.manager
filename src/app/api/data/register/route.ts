@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     }
     try {
         const supabase = await createClient();
-        const { error } = await supabase.rpc(
+        const { data, error } = await supabase.rpc(
             "post_register_form",
             { 
                 p_user_id: user_id,
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
             });
         }
         return NextResponse.json({
-            data: "ok",
+            data: data[0].subscription_id,
             status: 200,
         });
 
