@@ -89,8 +89,8 @@ export const useRegisterForm = () => {
             amount: number;
             currency: string;
             date_start: string;
-            payment_method_id: string | null;
-            card_number: string | null;
+            payment_method_id: string | null | undefined;
+            card_number: string | null | undefined;
         }) => {
             const res = await postRegisterForm({
                 data: {

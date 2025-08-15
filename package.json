@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "@midudev/tailwind-animations": "^0.2.0",
     "@react-spring/three": "^10.0.1",
     "@react-three/fiber": "^9.3.0",
