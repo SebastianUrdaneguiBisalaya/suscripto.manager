@@ -181,7 +181,7 @@ function SimulationCard({ data }: SimulationCardProps) {
                             <span className="font-geist text-xs text-gray-400 grow">
                                 {item.pricing}
                             </span>
-                            <span className="shrink-0 h-auto w-7 flex justify-center items-center">
+                            <span className="shrink-0 h-auto w-7 hidden sm:flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24"><path fill="#fb2c36" d="m18.707 12.707l-1.414-1.414L13 15.586V6h-2v9.586l-4.293-4.293l-1.414 1.414L12 19.414z"/></svg>
                             </span>
                         </div>
