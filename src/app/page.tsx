@@ -38,9 +38,9 @@ export default function LandingPage() {
             Controla tus suscripciones en un solo lugar
           </h1>
           <p
-            className="font-geist font-normal text-base sm:text-lg text-center max-w-2xl text-white-cream animate-blurred-fade-in duration-200"
+            className="font-geist font-normal text-base sm:text-lg text-center max-w-xl text-white-cream animate-blurred-fade-in duration-200"
           >
-            Registra, organiza y recibe recordatorios antes de cada cobro. Conecta con <span className="font-semibold underline">Google Calendar</span> y no vuelvas a pagar por algo que no usas.
+            Registra, organiza y recibe recordatorios antes de cada cobro. <br/> <span className="font-semibold">No vuelvas a pagar por algo que no usas.</span>
           </p>
           <Link href="/home/dashboard"
             className="relative font-sora font-semibold text-sm sm:text-base text-center w-fit px-4 py-3 cursor-pointer bg-white text-black shadow-[3px_3px_0px_rgba(255,255,255,0.8)] border border-black
@@ -80,7 +80,7 @@ export default function LandingPage() {
           id="section-about"
           className="w-full flex flex-col items-center gap-8 px-2 py-6"
         >
-          <ScrollFadeText text="Suscripto es una aplicación web que te permite registrar, organizar y recibir recordatorios antes de cada cobro. Conecta con Google Calendar y no vuelvas a pagar por algo que no usas." />
+          <ScrollFadeText text="Como muchos, tenía un problema personal: mis suscripciones estaban por todas partes. Era un caos llevar el control de los cobros, saber qué cuentas seguían activas o decidir si realmente necesitaba todas esas herramientas. De ahí surgió la idea de suscripto.manager, una solución práctica para organizar y tomar mejores decisiones sobre mis gastos." />
         </section>
       </main>
       <footer

@@ -28,12 +28,12 @@ export default function ScrollFadeText({ text }: Props) {
 
 function FadeWord({ word }: { word: string }) {
     const ref = useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { amount: 0.8, margin: "-50px" });
+    const inView = useInView(ref, { amount: 1, margin: "-50px" });
 
     return (
         <motion.span
             ref={ref}
-            className="transition-opacity duration-300 ease-in-out font-geist text-4xl text-white-cream"
+            className="transition-opacity duration-400 ease-in-out font-geist text-2xl sm:text-4xl text-white-cream"
             animate={{ opacity: inView ? 1 : 0.5 }}
         >
             {word}

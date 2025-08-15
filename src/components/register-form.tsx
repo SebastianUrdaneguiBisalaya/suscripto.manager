@@ -1,26 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Input from "@/components/input";
 import Select from "@/components/select";
 import { useUserStore } from "@/store/useUserStore";
 import { useRegisterForm, useGetPlatforms, useGetPaymentMethods } from "@/apis/hooks";
 import { dataRecurrences, dataCurrencies } from "@/constants/data";
 import { formatDate } from "@/lib/fn";
+import { useForm, Controller } from "react-hook-form";
+import { registerFormSchema, RegisterFormSchema } from "@/lib/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface RegisterFormProps {
     isOpen: boolean;
     toggleRegisterForm: () => void;
-}
-
-interface DataProps {
-    company: string;
-    recurrence: string;
-    currency: string;
-    amount: string;
-    date_start: string;
-    payment_method: string | null;
-    card_number: string | null;
 }
 
 export default function RegisterForm({
@@ -32,44 +25,47 @@ export default function RegisterForm({
     const { data: payment_methods, isPending: isLoadingPaymentMethods } = useGetPaymentMethods();
     const { mutateAsync: registerForm, isPending: isLoadingRegisterForm } = useRegisterForm();
 
-
-    const date = formatDate(new Date());
-
-    const [data, setData] = useState<DataProps>({
-        company: "",
-        recurrence: dataRecurrences[0].value,
-        currency: dataCurrencies[0].value,
-        amount: "",
-        date_start: date,
-        payment_method: "",
-        card_number: null,
+    const { 
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+     } = useForm<RegisterFormSchema>({
+        resolver: zodResolver(registerFormSchema),
+        defaultValues: {
+            company_id: "",
+            recurrence: dataRecurrences[0].value,
+            currency: dataCurrencies[0].value,
+            amount: 0,
+            date_start: formatDate(new Date()),
+            payment_method_id: null,
+            card_number: null,
+        },
     });
 
-    const handleRegisterForm = async () => {
-        if (!user?.user_id || !data.company || !data.recurrence || !data.amount || !data.currency || !data.date_start) {
-            console.log(user?.user_id, data.company, data.recurrence, data.amount, data.currency, data.date_start);
-            return;
-        }
+
+    const onSubmit = async (data: RegisterFormSchema) => {
+        if (!user?.user_id) return;
         try {
             const res = await registerForm({
                 user_id: user?.user_id ?? "",
-                company_id: data.company,
+                company_id: data.company_id,
                 recurrence: data.recurrence,
                 amount: Number(data.amount),
                 currency: data.currency,
                 date_start: data.date_start,
-                payment_method_id: data.payment_method,
+                payment_method_id: data.payment_method_id,
                 card_number: data.card_number,
             });
             if (res?.subscription_id) {
-                setData({
-                    company: platforms?.[0]?.platform_id ?? "",
+                reset({
+                    company_id: platforms?.[0]?.platform_id ?? "",
                     recurrence: dataRecurrences[0].value,
                     currency: dataCurrencies[0].value,
-                    amount: "",
-                    date_start: date,
-                    payment_method: payment_methods?.[0]?.payment_method_id?? "",
-                    card_number: null,
+                    amount: 0,
+                    date_start: formatDate(new Date()),
+                    payment_method_id: payment_methods?.[0]?.payment_method_id?? "",
+                    card_number: "",
                 });
                 toggleRegisterForm();   
             }
@@ -80,13 +76,12 @@ export default function RegisterForm({
 
     useEffect(() => {
         if (platforms && payment_methods) {
-            setData((prevData) => ({
-                ...prevData,
-                company: platforms?.[0]?.platform_id ?? "",
-                payment_method: payment_methods?.[0]?.payment_method_id ?? "",
-            }))
+            reset({
+                company_id: platforms?.[0]?.platform_id ?? "",
+                payment_method_id: payment_methods?.[0]?.payment_method_id ?? "",
+            })
         }
-    }, [platforms, payment_methods]);
+    }, [platforms, payment_methods, reset]);
 
     useEffect(() => {
         if (isOpen) {
@@ -116,36 +111,64 @@ export default function RegisterForm({
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 512 512"><path fill="#000000" d="m289.94 256l95-95A24 24 0 0 0 351 127l-95 95l-95-95a24 24 0 0 0-34 34l95 95l-95 95a24 24 0 1 0 34 34l95-95l95 95a24 24 0 0 0 34-34Z"/></svg>
                     </button>
                 </div>
-                <div className="flex flex-col gap-4 pt-4">
-                    <Select
-                        label="Nombre de la plataforma *"
-                        options={platforms ?? []}
-                        field="company"
-                        value={data.company}
-                        setValue={setData}
+                <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col gap-4 pt-4"
+                >
+                    <Controller
+                        name="company_id"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                label="Nombre de la plataforma *"
+                                options={platforms ?? []}
+                                value={field.value}
+                                onChange={field.onChange}
+                                error={errors.company_id?.message}
+                            />
+                        )}
                     />
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
-                        <Select
-                            label="Recurrencia *"
-                            options={dataRecurrences}
-                            field="recurrence"
-                            value={data.recurrence}
-                            setValue={setData}
+                        <Controller
+                            name="recurrence"
+                            control={control}
+                            render={({ field }) => (
+                                <Select
+                                    label="Recurrencia *"
+                                    options={dataRecurrences}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    error={errors.recurrence?.message}
+                                />
+                            )}
                         />
-                        <Select
-                            label="Moneda *"
-                            options={dataCurrencies}
-                            field="currency"
-                            value={data.currency}
-                            setValue={setData}
+                        <Controller
+                            name="currency"
+                            control={control}
+                            render={({ field }) => (
+                                <Select
+                                    label="Moneda *"
+                                    options={dataCurrencies}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    error={errors.currency?.message}
+                                />
+                            )}
                         />
                     </div>
-                    <Input
-                        label="Monto *"
-                        placeholder="0"
-                        type="number"
-                        value={data.amount}
-                        setValue={(value) => setData((prev) => ({ ...prev, amount: value }))}
+                    <Controller
+                        name="amount"
+                        control={control}
+                        render={({ field }) => (
+                            <Input
+                                label="Monto *"
+                                placeholder="0"
+                                type="number"
+                                value={String(field.value)}
+                                onChange={field.onChange}
+                                error={errors.amount?.message}
+                            />
+                        )}
                     />
                     <div className="flex flex-row items-center w-full gap-4">
                         <div className="h-[0.05rem] w-full bg-gray-500" />
@@ -153,26 +176,38 @@ export default function RegisterForm({
                         <div className="h-[0.05rem] w-full bg-gray-500" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
-                        <Select
-                            label="Método de pago"
-                            options={payment_methods ?? []}
-                            field="payment_method"
-                            value={data.payment_method ?? ""}
-                            setValue={setData}
+                        <Controller
+                            name="payment_method_id"
+                            control={control}
+                            render={({ field }) => (
+                                <Select
+                                    label="Método de pago"
+                                    options={payment_methods ?? []}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    error={errors.payment_method_id?.message}
+                                />
+                            )}
                         />
-                        <Input
-                            label="Últimos 3 dígitos"
-                            placeholder="123"
-                            type="text"
-                            value={data.card_number ?? ""}
-                            setValue={(value) => setData((prev) => ({ ...prev, card_number: value }))}
+                        <Controller
+                            name="card_number"
+                            control={control}
+                            render={({ field }) => (
+                                <Input
+                                    label="Últimos 3 dígitos"
+                                    placeholder="123"
+                                    type="text"
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    error={errors.card_number?.message}
+                                />
+                            )}
                         />
                     </div>
                     {
                         !isLoadingPaymentMethods && !isLoadingPlatforms && (
                             <button
                                 className={`bg-blue-600 cursor-pointer text-white font-geist text-sm sm:text-base px-4 py-3 rounded-lg ${isLoadingRegisterForm ? "opacity-50 cursor-not-allowed" : ""}`}
-                                onClick={handleRegisterForm}
                                 disabled={isLoadingRegisterForm}
                                 type="button"
                             >
@@ -180,7 +215,7 @@ export default function RegisterForm({
                             </button>
                         ) 
                     }
-                </div>
+                </form>
             </div>
             </div>
         </div>
