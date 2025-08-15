@@ -7,6 +7,7 @@ import TableSubscription from "@/components/table-subscription";
 import RegisterForm from "@/components/register-form";
 import { useDashboardData } from "@/apis/hooks";
 import { useUserStore } from "@/store/useUserStore";
+import { AnimatePresence } from "motion/react";
 
 interface DataProps {
   statistics: {
@@ -131,10 +132,16 @@ export default function DashboardPage() {
       <div className="w-full">
 
       </div>
-      <RegisterForm
-        isOpen={isOpen}
-        toggleRegisterForm={toggleRegisterForm}
-      />
+      <AnimatePresence>
+        {
+          isOpen && (
+            <RegisterForm
+              isOpen={isOpen}
+              toggleRegisterForm={toggleRegisterForm}
+            />
+          )
+        }
+      </AnimatePresence>
     </main>
   )
 }

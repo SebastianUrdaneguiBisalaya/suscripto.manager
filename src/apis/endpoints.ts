@@ -82,7 +82,7 @@ type ResponsePlatforms = APIResponse<{
 
 type ResposePaymentMethods = APIResponse<{
     payment_method_id: string;
-    payment_method_name: string;
+    payment_method: string;
 }[]>;
 
 export const getStatistics = async ({

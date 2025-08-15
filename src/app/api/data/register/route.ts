@@ -48,7 +48,7 @@ export async function POST(req: Request) {
             });
         }
         return NextResponse.json({
-            data: data[0].subscription_id,
+            data: data[0],
             status: 200,
         });
 
