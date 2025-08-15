@@ -7,12 +7,10 @@ import { useUserStore } from "@/store/useUserStore";
 import { SignOut } from "@/app/api/auth/actions";
 import { createClient } from "@/lib/supabase/client";
 import { cutFullName } from "@/lib/fn";
-import { useUserData } from "@/apis/hooks";
 
 export default function UserProfile() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const { user, setUser, resetUser } = useUserStore();
-    const { data: dataGoogleCalendar } = useUserData({ user_id: user?.user_id ?? "" });
     const router = useRouter();
 
     const handleLogout = async () => {
@@ -32,13 +30,11 @@ export default function UserProfile() {
                 router.replace("/");
                 return;
             }
-            console.log(dataGoogleCalendar);
             const userData = {
                 user_id: data?.user?.id as string,
                 user_email: data?.user?.email as string,
                 user_name: data?.user?.user_metadata.full_name as string,
                 user_avatar: data?.user?.user_metadata.avatar_url as string,
-                google_calendar_id: dataGoogleCalendar?.google_calendar_id ? dataGoogleCalendar.google_calendar_id : null,
             }
             setUser(userData);
         }

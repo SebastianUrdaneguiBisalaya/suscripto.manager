@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { useCancelSubscription, useDeleteCalendarEvent } from "@/apis/hooks";
+import { useCancelSubscription } from "@/apis/hooks";
 import { useUserStore } from "@/store/useUserStore";
 
 interface CancelSubscriptionProps {
     subscription_id: string;
-    event_id: string;
     platform_name: string;
     isShown: boolean;
     toggle: () => void;
@@ -14,26 +13,18 @@ interface CancelSubscriptionProps {
 
 export default function CancelSubscription({
     subscription_id,
-    event_id,
     platform_name,
     isShown,
     toggle,
 }: CancelSubscriptionProps) {
     const { user } = useUserStore();
     const { mutateAsync: cancelSubscription } = useCancelSubscription();
-    const { mutateAsync: deleteCalendarEvent } = useDeleteCalendarEvent();
 
     const handleCancelSubscription = async () => {
         try {
             await cancelSubscription({
                 subscription_id,
                 user_id: user?.user_id ?? "",
-            });
-            await deleteCalendarEvent({
-                calendar_id: user?.google_calendar_id ?? "",
-                body: {
-                    event_id: event_id,
-                },
             });
             toggle();
         } catch (error: unknown) {
