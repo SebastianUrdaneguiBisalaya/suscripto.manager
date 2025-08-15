@@ -1,23 +1,22 @@
-interface SelectOption {
-    value: string;
+interface SelectProps<T> {
     label: string;
-}
-
-interface SelectProps {
-    label: string;
-    options: Record<string, string>[];
+    options: T[];
     value: string | null | undefined;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    valueKey: keyof T;
+    labelKey: keyof T;
     error?: string;
 }
 
-export default function Select({
+export default function Select<T extends Record<string, any>>({
     label,
     options,
     value,
     onChange,
+    valueKey,
+    labelKey,
     error,
-}: SelectProps) {
+}: SelectProps<T>) {
     return (
         <div className="w-full flex flex-col gap-2">
             <label className="text-gray-500 text-sm font-geist" htmlFor={label}>{label}</label>
@@ -29,12 +28,14 @@ export default function Select({
             >
                 {
                     options.map((option) => {
+                        const optionValue = String(option[valueKey]);
+                        const optionLabel = String(option[labelKey]);
                         return (
                             <option
-                                key={option.value}
-                                value={option.value}
+                                key={String(optionValue)}
+                                value={String(optionValue)}
                             >
-                                {option.label}
+                                {optionLabel}
                             </option>
                         )
                     })

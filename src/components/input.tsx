@@ -2,7 +2,7 @@ interface InputProps {
     label: string;
     placeholder: string;
     type: string;
-    value: string | null | undefined;
+    value: string | number | null | undefined;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     error?: string;
 }

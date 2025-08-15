@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { registerFormSchemaBackend } from "@/lib/schema";
 
 export async function POST(req: Request) {
     const data = await req.json();
@@ -14,9 +15,12 @@ export async function POST(req: Request) {
         card_number,
     } = data;
 
-    if (!user_id || !company_id || !recurrence || !amount || !currency || !date_start) {
+    const validationResult = registerFormSchemaBackend.safeParse(data);
+
+    if (!validationResult.success) {
         return NextResponse.json({
-            error: "Faltan datos obligatorios.",
+            error: "Datos de entrada inválidos.",
+            details: validationResult.error.issues,
             status: 400,
             isError: true,
         });
@@ -44,7 +48,7 @@ export async function POST(req: Request) {
             });
         }
         return NextResponse.json({
-            data: data[0].subscription_id,
+            data: data[0],
             status: 200,
         });
 
