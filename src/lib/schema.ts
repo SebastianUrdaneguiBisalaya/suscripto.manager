@@ -10,4 +10,15 @@ export const registerFormSchema = z.object({
     card_number: z.string().optional().nullable(),
 });
 
+export const registerFormSchemaBackend = z.object({
+    user_id: z.uuidv4(),
+    company_id: z.uuidv4(),
+    recurrence: z.string(),
+    amount: z.number().positive(),
+    currency: z.string().length(3),
+    date_start: z.string().length(10),
+    payment_method_id: z.uuidv4().optional().nullable(),
+    card_number: z.string().length(3).optional().nullable(),
+});
+
 export type RegisterFormSchema = z.infer<typeof registerFormSchema>;
