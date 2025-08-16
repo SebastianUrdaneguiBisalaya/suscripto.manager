@@ -8,6 +8,25 @@
 
 **Made with 💚 by [Sebastian Marat Urdanegui Bisalaya](https://sebastianurdanegui.vercel.app/)**.
 
+## **User Interface**
+
+#### **Landing Page**
+![Landing Page](/public/landing-page.png)
+
+![Landing Page](/public/landing-page-features.png)
+
+#### **Auth Page**
+![Auth Page](/public/auth%20page.png)
+
+#### **Dashboard Page**
+![Dashboard Page](/public/dashboard.png)
+
+#### **Transactions Page**
+![Transactions Page](/public/transactions.png)
+
+#### **Notifications Page**
+![Notifications Page](/public/notifications.png)
+
 ## **Tech Stack**
 
 1. [**React**](https://react.dev/) - Open-Source JavaScript Library.
