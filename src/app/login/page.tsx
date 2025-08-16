@@ -6,10 +6,10 @@ import { SignInWithGoogle } from "../api/auth/actions";
 export default function LoginPage() {
     return (
         <div
-            className="w-full h-screen grid grid-cols-1 md:grid-cols-2 overflow-x-hidden overflow-y-hidden"
+            className="w-full h-dvh grid grid-cols-1 md:grid-cols-2 overflow-hidden"
         >
             <div
-                className="h-full w-full hidden md:block mask-fade-to-right overflow-x-hidden overflow-y-hidden"
+                className="grow w-full hidden md:block mask-fade-to-right overflow-x-hidden overflow-y-hidden"
             >
                 <ShaderGradientCanvas
                 >
@@ -21,7 +21,7 @@ export default function LoginPage() {
 
             </div>
             <div
-                className="h-screen w-full p-8 flex flex-col gap-8 justify-center items-center overflow-x-hidden overflow-y-hidden"
+                className="grow w-full p-8 flex flex-col gap-8 justify-center items-center overflow-x-hidden overflow-y-hidden"
             >
                 <div
                     className="flex flex-col items-center justify-center gap-2"
