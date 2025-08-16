@@ -5,7 +5,7 @@ import BentoGrid from "@/components/bento-grid";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen max-w-6xl w-full h-full p-8 flex flex-col gap-8">
+    <div className="min-h-screen max-w-6xl w-full h-full p-4 sm:p-8 flex flex-col gap-8 overflow-x-hidden">
       <header
         id="header-landing-page"
         className="flex flex-row justify-between items-center"

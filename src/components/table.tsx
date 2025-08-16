@@ -174,11 +174,11 @@ export default function Table({
 
     return (
         <div
-            className="flex flex-col p-4 gap-4 w-full"
+            className="flex flex-col py-4 gap-4 w-full"
         >
             <div className="flex flex-col w-full overflow-x-auto hide-scrollbar">
                 <table
-                    className="min-w-full table-auto"
+                    className="w-full table-auto"
                 >
                     <thead>
                         {
@@ -239,15 +239,6 @@ export default function Table({
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity=".5"/><path fill="#ffffff" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
                         </span>
                         <p className="font-geist text-white-cream text-sm text-center">Cargando datos...</p>
-                    </div>
-                )
-            }
-            {
-                !hasNextPage && items.length > 0 && (
-                    <div
-                        className="w-full px-4"
-                    >
-                        <p className="font-geist text-white-cream text-sm text-center">No hay más datos</p>
                     </div>
                 )
             }

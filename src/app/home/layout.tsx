@@ -6,7 +6,7 @@ import { protectedPage } from "@/lib/protected";
 export default async function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     await protectedPage();
     return (
-        <div className="max-w-6xl w-full h-full flex flex-col gap-8 justify-start p-8">
+        <div className="max-w-6xl w-full h-full flex flex-col gap-8 justify-start p-8 overflow-x-hidden">
             <header
                 className="flex flex-row justify-between items-start"
             >

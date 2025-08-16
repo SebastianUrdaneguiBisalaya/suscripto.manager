@@ -8,24 +8,26 @@ interface CardNotificationProps {
 export default function CardNotification({ platform_name, amount, currency, next_date }: CardNotificationProps) {
     return (
         <div
-            className="border-t border-b border-gray-600 p-3 flex flex-row items-center gap-6 hover:bg-[rgba(255,255,255,0.03)] rounded-lg"
+            className="border-t border-b border-gray-600 p-3 flex flex-col sm:flex-row items-end sm:items-center gap-4 sm:gap-6 hover:bg-[rgba(255,255,255,0.03)] rounded-lg"
         >
-            <span
-                className="flex justify-center items-center rounded-full border border-gray-500 p-2"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 22a2.02 2.02 0 0 1-2.01-2h4a2.02 2.02 0 0 1-.15.78a2.042 2.042 0 0 1-1.44 1.18h-.047A1.922 1.922 0 0 1 12 22Zm8-3H4v-2l2-1v-5.5a8.065 8.065 0 0 1 .924-4.06A4.654 4.654 0 0 1 10 4.18V2h4v2.18c2.579.614 4 2.858 4 6.32V16l2 1v2Z"/></svg>
-            </span>
-            <div className="flex flex-col gap-1 grow">
-                <p
-                    className="font-geist font-bold text-base text-white-cream"
+            <div className="flex flex-row items-center gap-4 w-full grow">
+                <span
+                    className="flex justify-center items-center rounded-full border border-gray-500 p-2"
                 >
-                    {platform_name}
-                </p>
-                <span className="font-geist text-sm text-gray-400">
-                    {currency} - {amount}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 22a2.02 2.02 0 0 1-2.01-2h4a2.02 2.02 0 0 1-.15.78a2.042 2.042 0 0 1-1.44 1.18h-.047A1.922 1.922 0 0 1 12 22Zm8-3H4v-2l2-1v-5.5a8.065 8.065 0 0 1 .924-4.06A4.654 4.654 0 0 1 10 4.18V2h4v2.18c2.579.614 4 2.858 4 6.32V16l2 1v2Z"/></svg>
                 </span>
+                <div className="flex flex-col gap-1">
+                    <p
+                        className="font-geist font-bold text-base text-white-cream"
+                    >
+                        {platform_name}
+                    </p>
+                    <span className="font-geist text-sm text-gray-400">
+                        {currency} - {amount}
+                    </span>
+                </div>
             </div>
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row items-center gap-2 shrink-0">
                 <span className="flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 16 16"><path fill="#ffffff" d="M14.5 16h-13C.67 16 0 15.33 0 14.5v-12C0 1.67.67 1 1.5 1h13c.83 0 1.5.67 1.5 1.5v12c0 .83-.67 1.5-1.5 1.5M1.5 2c-.28 0-.5.22-.5.5v12c0 .28.22.5.5.5h13c.28 0 .5-.22.5-.5v-12c0-.28-.22-.5-.5-.5z"/><path fill="#ffffff" d="M4.5 4c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v3c0 .28-.22.5-.5.5m7 0c-.28 0-.5-.22-.5-.5v-3c0-.28.22-.5.5-.5s.5.22.5.5v3c0 .28-.22.5-.5.5m4 2H.5C.22 6 0 5.78 0 5.5S.22 5 .5 5h15c.28 0 .5.22.5.5s-.22.5-.5.5"/></svg>
                 </span>
@@ -33,7 +35,7 @@ export default function CardNotification({ platform_name, amount, currency, next
                     {next_date}
                 </span>
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center shrink-0">
                 <span
                     className="font-geist text-sm text-white-cream bg-[rgba(0,102,255,0.7)] px-2 py-1 rounded-xl"
                 >

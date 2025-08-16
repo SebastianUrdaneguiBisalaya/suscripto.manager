@@ -11,7 +11,7 @@ export default function ScrollFadeText({ text }: Props) {
     const words = text.split(" ");
     return (
         <div
-            className="h-fit flex flex-col items-center justify-center"
+            className="h-fit flex flex-col items-center justify-center overflow-x-hidden"
         >
             <div
                 className="max-w-2xl text-center leading-relaxed flex flex-wrap gap-2"
@@ -28,7 +28,7 @@ export default function ScrollFadeText({ text }: Props) {
 
 function FadeWord({ word }: { word: string }) {
     const ref = useRef<HTMLDivElement>(null);
-    const inView = useInView(ref, { amount: 1, margin: "-50px" });
+    const inView = useInView(ref, { amount: 0.5, margin: "-50px 0px" });
 
     return (
         <motion.span
