@@ -32,8 +32,8 @@ export default function Sidebar() {
             </button>
             {
                 isOpen && (
-                    <div className="fixed inset-0 backdrop-blur-lg z-[100] px-2">
-                        <div className="absolute top-0 right-0 w-full max-w-64 bg-black border-l border-gray-600 p-4 overflow-y-auto h-screen hidde-scrollbar flex flex-col items-end gap-8">
+                    <div className="fixed inset-0 backdrop-blur-lg z-[100] px-2 overflow-x-hidden">
+                        <div className="absolute top-0 right-0 w-full max-w-64 bg-black border-l border-gray-600 p-4 overflow-y-auto h-screen hidde-scrollbar flex flex-col items-end gap-8 overflow-x-hidden">
                             <button
                                 className="flex items-center justify-center bg-white-cream rounded-full p-1 cursor-pointer w-fit h-fit"
                                 type="button"

@@ -103,7 +103,7 @@ export default function RegisterForm({
 
     return (
         <motion.div 
-            className="fixed inset-0 w-full h-full backdrop-blur-lg z-50 flex items-center justify-center px-2"
+            className="fixed inset-0 w-full h-full backdrop-blur-lg z-50 flex items-center justify-center px-2 overflow-x-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

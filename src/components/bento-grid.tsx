@@ -8,7 +8,7 @@ import {
 
 export default function BentoGrid() {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full h-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full h-auto overflow-x-hidden">
             <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-3 items-start justify-start h-[45%] w-full rounded-xl border border-gray-600 p-4">
                     <h3 className="font-sora font-semibold text-white-cream text-lg sm:text-xl">Tracking</h3>
@@ -134,7 +134,7 @@ function NotificationsCard({ data }: NotificationsCardProps) {
 
 function StatisticsCard({ data }: StatisticsCardProps) {
     return (
-        <div className="w-full h-full flex flex-col gap-4">
+        <div className="w-full h-full flex flex-col gap-4 overflow-x-hidden">
             <div className="w-full grid grid-cols-2 gap-4">
                 {
                     data.map((item, index) => (
@@ -162,7 +162,7 @@ function StatisticsCard({ data }: StatisticsCardProps) {
 
 function SimulationCard({ data }: SimulationCardProps) {
     return (
-        <div className="w-full h-full flex flex-col gap-4 border border-gray-600 rounded-lg p-4 shadow-[3px_3px_0px_rgba(255,255,255,0.6)]">
+        <div className="w-full h-full flex flex-col gap-4 border border-gray-600 rounded-lg p-4 shadow-[3px_3px_0px_rgba(255,255,255,0.6)] overflow-x-hidden">
             {
                 data.map((item, index) => (
                     <div key={index} className="grid grid-cols-2 gap-4 w-full items-center border-t border-b border-gray-600">

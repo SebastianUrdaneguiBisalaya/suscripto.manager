@@ -45,7 +45,7 @@ export default function CancelSubscription({
     }, [isShown]);
 
     return (
-        <div className="fixed inset-0 w-full h-full backdrop-blur-lg z-50 flex items-center justify-center px-2">
+        <div className="fixed inset-0 w-full h-full backdrop-blur-lg z-50 flex items-center justify-center px-2 overflow-x-hidden">
             <div className="flex flex-col gap-6 w-full max-w-md bg-black border border-gray-600 rounded-xl p-8 shadow-xl overflow-y-auto max-h-[90vh] hidde-scrollbar">
                 <h1 className="font-sora text-lg sm:text-2xl font-bold text-white-cream">¿Estás seguro de que deseas cancelar la subscripción?</h1>
                 <p className="text-gray-400 text-xs font-geist text-left">Luego de la confirmación, se procederá a desactivar el servicio de tracking para la plataforma <span className="font-sora font-bold underline text-white-cream">{platform_name}</span>.</p>

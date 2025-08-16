@@ -60,10 +60,10 @@ export default function UserProfile() {
                     className="flex flex-col items-start gap-0.5"
                 >
                     <span className="font-sora font-semibold text-sm text-white-cream">
-                        {cutFullName(user?.user_name ?? "")}
+                        {cutFullName(user?.user_name ?? "Nombre del usuario")}
                     </span>
                     <span className="font-geist font-normal text-xs text-white-cream">
-                        {user?.user_email}
+                        {user?.user_email ?? "usuario@email.com"}
                     </span>
                 </div>
             </button>
