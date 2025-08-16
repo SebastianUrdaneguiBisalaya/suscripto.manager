@@ -8,7 +8,7 @@ interface SelectProps<T> {
     error?: string;
 }
 
-export default function Select<T extends Record<string, any>>({
+export default function Select<T extends Record<string, unknown>>({
     label,
     options,
     value,
