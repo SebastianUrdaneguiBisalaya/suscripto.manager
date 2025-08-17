@@ -22,7 +22,7 @@ export default function Select<T extends Record<string, unknown>>({
             <label className="text-gray-500 text-sm font-geist" htmlFor={label}>{label}</label>
             <select
                 id={label}
-                className={`border rounded-lg p-2 text-base font-geist focus:outline-none text-white-cream ${error ? "border-red-500" : "border-gray-500"}`}
+                className={`border rounded-lg bg-black p-2 text-base font-geist focus:outline-none text-white-cream ${error ? "border-red-500" : "border-gray-500"}`}
                 onChange={onChange}
                 value={value ?? ""}
             >
@@ -34,6 +34,7 @@ export default function Select<T extends Record<string, unknown>>({
                             <option
                                 key={String(optionValue)}
                                 value={String(optionValue)}
+                                className="bg-black text-white-cream"
                             >
                                 {optionLabel}
                             </option>

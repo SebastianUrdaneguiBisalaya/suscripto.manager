@@ -57,7 +57,7 @@ export default function RegisterForm({
                 payment_method_id: data.payment_method_id,
                 card_number: data.card_number,
             });
-            if (res?.subscription_id) {
+            if (res) {
                 reset({
                     company_id: platforms?.[0]?.platform_id ?? "",
                     recurrence: dataRecurrences[0].value ?? "",
@@ -74,7 +74,6 @@ export default function RegisterForm({
     }
 
     const handleFormSubmit = (data: RegisterFormSchema) => {
-        console.log(data);
         onSubmit(data);
     }
 

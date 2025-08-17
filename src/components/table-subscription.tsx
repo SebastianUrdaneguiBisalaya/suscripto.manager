@@ -54,7 +54,6 @@ export default function TableSubscription({
 
     const handleDeleteSubscription = (company: string) => {
         const findSubscriptionId = data.find((item) => item.platforms.platform_name === company);
-        console.log(findSubscriptionId);
         setDataToCancel({
             subscription_id: findSubscriptionId?.id ?? "",
             platform_name: company,
