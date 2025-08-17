@@ -191,7 +191,7 @@ export default function RegisterForm({
                                         if (value === "" || value === null) {
                                             field.onChange(undefined);
                                         } else {
-                                            const numericValue = parseFloat(value);
+                                            const numericValue = parseFloat(parseFloat(value).toFixed(2));
                                             field.onChange(isNaN(numericValue) ? undefined : numericValue);
                                         }
                                     }}
