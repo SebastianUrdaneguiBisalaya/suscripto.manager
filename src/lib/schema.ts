@@ -22,7 +22,10 @@ export const registerFormSchemaBackend = z.object({
     currency: z.string().length(3),
     date_start: z.string().length(10),
     payment_method_id: z.string().optional().nullable(),
-    card_number: z.string().length(3).optional().nullable(),
+    card_number: z.string().optional().or(z.literal("")).refine(
+        (val) => !val || val.length === 3,
+        "Debe ingresar los últimos 3 dígitos de la tarjeta."
+    ),
 });
 
 export type RegisterFormSchema = z.infer<typeof registerFormSchema>;
